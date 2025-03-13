@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopAI</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="navbar">
+            <div class="logo">SHOPAI</div>
+
+            <div class="search-container">
+                <input type="text" placeholder="Search">
+                <button>Search</button>
+            </div>
+    
+            <ul class="nav-links">
+                <li><a href="index.html" id="home">Home</a></li>
+                <li><a href="#products-section">Products</a></li>
+                <li><a href="#services-section" id="services">Services</a></li>
+                <li><a href="#about-section" id="about">About</a></li>
+                <li><a href="#faq-section" id="faq">FAQ</a></li>
+                <li><a href="#contact-section" id="contact">Contact</a></li>
+            </ul>
+        </header>
+
+        <div class="first-container">
+            <div class="slideshow-container">
+                <div class="mySlides fade">
+                    <img src="img/product1.jpg">
+                </div>
+                <div class="mySlides fade">
+                    <img src="img/product2.jpg">
+                </div>
+                <div class="mySlides fade">
+                    <img src="img/product1.jpg">
+                </div>
+                <div class="mySlides fade">
+                    <img src="img/product2.jpg">
+                </div>
+            </div>
+            <br>
+            <div class="dots-container">
+                <span class="dot" onclick="currentSlide(1)"></span> 
+                <span class="dot" onclick="currentSlide(2)"></span> 
+                <span class="dot" onclick="currentSlide(3)"></span> 
+                <span class="dot" onclick="currentSlide(4)"></span> 
+            </div>
+        </div>
+
+        <div class="second-container">
+        </div>
+
+        <footer>
+            <p>© 2023 ShopAI. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+
+    <script src="script/script.js"></script>
+</body>
+</html>

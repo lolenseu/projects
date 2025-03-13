@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myChart</title>
+</head>
+<body>
+
+    <div>
+        <canvas id="myChart"></canvas>
+      </div>
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+      <script>
+        const ctx = document.getElementById('myChart');
+      
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Solo Leveling', 'Sakamoto days', 'Jujutsu kaisen', 'Demon Slayer'],
+            datasets: [{
+              label: 'Most Watch Anime',
+              data: [10, 9, 10, 8],
+              borderWidth: 2,
+              borderColor: 'gray',
+              backgroundColor: ['red', 'blue', 'yellow', 'green', 'purple', 'orange']
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      </script>
+      
+    
+</body>
+</html>
