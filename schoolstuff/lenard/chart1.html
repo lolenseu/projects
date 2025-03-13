@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myChart</title>
+</head>
+<body>
+
+    <div>
+        <canvas id="myChart"></canvas>
+      </div>
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+      <script>
+        const ctx = document.getElementById('myChart');
+      
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Fiestas and Cultural Events', 'Weddings and Serenades', 'Religious Gatherings', 'Agricultural Festivals', 'Casual Gatherings and Karaoke'],
+            datasets: [{
+              label: 'Most Common Muscial Genres in the Ilocos Region',
+              data: [40, 25, 15, 10, 10],
+              borderWidth: 2,
+              borderColor: 'gray',
+              backgroundColor: ['#FF5733', '#33B5E5', '#FFC300', '#6A0572', '#28A745']
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      </script>
+      
+    
+</body>
+</html>
