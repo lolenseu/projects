@@ -47,7 +47,7 @@ body {
 .logo {
     font-size: 24px;
     font-weight: bold;
-    color: rgb(255, 255, 255);
+    color: white;
 }
 
 .nav-links {
@@ -169,7 +169,8 @@ body {
     margin-bottom: 40px;
 }
 
-.third-container p {
+.third-container li {
+    padding: 10px 0;
     text-align: justify;
     font-size: 18px;
     color: #bbb;
@@ -203,6 +204,7 @@ body {
 }
 
 .e-resources-row li {
+    padding: 2.5px 0;
     list-style-type: none;
 }
 
@@ -331,4 +333,60 @@ footer {
 
 .back-to-top:hover {
     background-color: rgb(0, 175, 0);
+}
+
+/* Mobile Phone Screen */
+@media screen and (max-width: 1080px) {
+    .navbar {
+        position: relative;
+        text-align: center;
+        background-color: #333;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 5%;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .second-container, .third-container, .fourth-container, .fifth-container {
+        padding: 50px 8%;
+    }
+
+    .e-resources-column {
+        flex-direction: column;
+    }
+
+    .e-resources-row {
+        flex-direction: column;
+    }
+
+    .history-row {
+        flex-direction: column;
+    }
+
+    .history-box {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+
+    .footer-top {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-box {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .footer-box img {
+        margin: 0 auto 20px;
+    }
+
+    .footer-bottom {
+        margin-top: 20px;
+    }
 }
