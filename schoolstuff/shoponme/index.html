@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopOnME</title>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href="css/styles.css" rel="stylesheet">
+    <link rel="icon" href="img/shoponme.png" type="image/png" />
+
+    <!-- Bootstrap CSS and JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="navbar">
+            <div class="logo-container">
+                <div class="logo">ShopOnME</div>
+                <button class="hamburger-menu" id="hamburger-menu">☰</button>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Enter product name...">
+                <button onclick="scrollToProduct()">Search</button>
+            </div>
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html" id="home">Home</a></li>
+                <li><a href="#products-section">Products</a></li>
+                <li><a href="#services-section" id="services">Services</a></li>
+                <li><a href="#brands-section" id="brands">Brands</a></li>
+                <li><a href="#about-section" id="about">About</a></li>
+                <li><a href="#faq-section" id="faq">FAQ</a></li>
+                <li><a href="#contact-section" id="contact">Contact</a></li>
+                <li>
+                    <button id="userButton" class="user-icon">
+                        👤
+                    </button>
+                </li>
+                <li>
+                    <button id="cartButton" class="cart-icon" onclick="toggleCartPopover()">
+                        🛒 <span id="cartCount">0</span>
+                    </button>
+                </li>
+            </ul>
+
+            <div id="cartPopover" class="cart-popover hidden">
+                <h3>Shopping Cart</h3>
+                <ul id="cartItems"></ul>
+                <p id="cartTotal">Total: &#8369;0.00</p>
+                <button onclick="clearCart()">Clear Cart</button>
+            </div>
+        </header>
+
+        <div class="first-container">
+            <div class="slideshow-container">
+                <div class="mySlides fade">
+                    <img src="img/product1.jpeg">
+                </div>
+                <div class="mySlides fade">
+                    <img src="img/product2.jpeg">
+                </div>
+                <div class="mySlides fade">
+                    <img src="img/product3.jpg">
+                </div>
+                <div class="mySlides fade">
+                    <img src="img/product4.jpg">
+                </div>
+                <div class="mySlides fade">
+                    <img src="img/product5.jpeg">
+                </div>
+            </div>
+            <br>
+            <div class="dots-container">
+                <span class="dot" onclick="currentSlide(1)"></span> 
+                <span class="dot" onclick="currentSlide(2)"></span> 
+                <span class="dot" onclick="currentSlide(3)"></span> 
+                <span class="dot" onclick="currentSlide(4)"></span>
+                <span class="dot" onclick="currentSlide(5)"></span> 
+            </div>
+        </div>
+
+        <div class="second-container" id="products-section">
+            <h2 class="section-title">Our Products</h2>
+            <div class="product-row">
+                <div class="product" data-name="T-SHIRT" data-price="200.00" data-img="img/product1.jpeg">
+                    <img src="img/product1.jpeg" alt="Product 1" class="product-img" id="tshirt">
+                    <h3>T-SHIRT</h3>
+                    <p>&#8369;200.00</p>
+                </div>
+                <div class="product" data-name="HOODIE" data-price="800.00" data-img="img/product2.jpeg">
+                    <img src="img/product2.jpeg" alt="Product 2" class="product-img" id="hoodie">
+                    <h3>HOODIE</h3>
+                    <p>&#8369;800.00</p>
+                </div>
+                <div class="product" data-name="CAP" data-price="300.00" data-img="img/product3.jpg">
+                    <img src="img/product3.jpg" alt="Product 3" class="product-img" id="cap">
+                    <h3>CAP</h3>
+                    <p>&#8369;300.00</p>
+                </div>
+            </div>
+            <div class="product-row">
+                <div class="product" data-name="JEANS" data-price="300.00" data-img="img/product4.jpg">
+                    <img src="img/product4.jpg" alt="Product 4" class="product-img" id="jeans">
+                    <h3>JEANS</h3>
+                    <p>&#8369;300.00</p>
+                </div>
+                <div class="product" data-name="BAG" data-price="500.00" data-img="img/product5.jpeg">
+                    <img src="img/product5.jpeg" alt="Product 5" class="product-img" id="bag">
+                    <h3>BAG</h3>
+                    <p>&#8369;500.00</p>
+                </div>
+                <div class="product" data-name="SHOES" data-price="6000.00" data-img="img/product6.jpeg">
+                    <img src="img/product6.jpeg" alt="Product 6" class="product-img" id="shoes">
+                    <h3>SHOES</h3>
+                    <p>&#8369;6000.00</p>
+                </div>
+            </div>
+            <div class="product-row">
+                <div class="product" data-name="SUIT" data-price="8000.00" data-img="img/product7.jpeg">
+                    <img src="img/product7.jpeg" alt="Product 7" class="product-img" id="suit">
+                    <h3>SUIT</h3>
+                    <p>&#8369;8000.00</p>
+                </div>
+                <div class="product" data-name="SLIPPER" data-price="200.00" data-img="img/product8.jpeg">
+                    <img src="img/product8.jpeg" alt="Product 8" class="product-img" id="slipper">
+                    <h3>SLIPPER</h3>
+                    <p>&#8369;200.00</p>
+                </div>
+                <div class="product" data-name="LARGE BAG" data-price="3000.00" data-img="img/product9.jpeg">
+                    <img src="img/product9.jpeg" alt="Product 9" class="product-img" id="largebag">
+                    <h3>LARGE BAG</h3>
+                    <p>&#8369;3000.00</p>
+                </div>
+            </div>
+            <div class="product-row">
+                <div class="product" data-name="MUG" data-price="100.00" data-img="img/product10.png">
+                    <img src="img/product10.png" alt="Product 10" class="product-img" id="mug">
+                    <h3>MUG</h3>
+                    <p>&#8369;100.00</p>
+                </div>
+                <div class="product" data-name="PLATE" data-price="150.00" data-img="img/product11.png">
+                    <img src="img/product11.png" alt="Product 11" class="product-img" id="plate">
+                    <h3>PLATE</h3>
+                    <p>&#8369;150.00</p>
+                </div>
+                <div class="product" data-name="BALL" data-price="6000.00" data-img="img/product12.png">
+                    <img src="img/product12.png" alt="Product 12" class="product-img" id="ball">
+                    <h3>BALL</h3>
+                    <p>&#8369;6000.00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Product -->
+        <div id="productModal" class="custom-modal">
+            <div class="custom-modal-content">
+              <span class="custom-close-btn" onclick="closeModal()">&times;</span>
+              <img id="modalImage" src="" alt="Product Image">
+              <h3 id="modalTitle">Product Name</h3>
+              <p id="modalPrice">&#8369;0.00</p>
+              <button class="add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+            </div>
+          </div>
+
+        <div class="third-container" id="services-section">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="service-icon"></i>
+                    <h3>Fast Delivery</h3>
+                    <p>We offer fast and reliable delivery services to ensure your products reach you on time.</p>
+                </div>
+                <div class="service-card">
+                    <i class="service-icon"></i>
+                    <h3>Customer Support</h3>
+                    <p>Our customer support team is available 24/7 to assist you with any queries or issues.</p>
+                </div>
+                <div class="service-card">
+                    <i class="service-icon"></i>
+                    <h3>Easy Returns</h3>
+                    <p>We provide hassle-free returns and exchanges for your convenience.</p>
+                </div>
+                <div class="service-card">
+                    <i class="service-icon"></i>
+                    <h3>Secure Payment</h3>
+                    <p>Our payment gateway is secure and encrypted to protect your financial information.</p>
+                </div>
+                <div class="service-card">
+                    <i class="service-icon"></i>
+                    <h3>Gift Wrapping</h3>
+                    <p>We offer gift wrapping services to make your presents extra special.</p>
+                </div>
+                <div class="service-card">
+                    <i class="service-icon"></i>
+                    <h3>Exclusive Offers</h3>
+                    <p>Enjoy exclusive offers and discounts on your favorite products.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="fourth-container" id="brands-section">
+            <h2 class="section-title">Available Brands</h2>
+            <div class="brands-row">
+                <div class="brand">
+                    <img src="img/brand1.jpg" alt="Brand 1">
+                </div>
+                <div class="brand">
+                    <img src="img/brand2.jpg" alt="Brand 2">
+                </div>
+                <div class="brand">
+                    <img src="img/brand3.png" alt="Brand 3">
+                </div>
+                <div class="brand">
+                    <img src="img/brand4.jpg" alt="Brand 4">
+                </div>
+                <div class="brand">
+                    <img src="img/brand5.png" alt="Brand 5">
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section about" id="about-section">
+                    <h2>About Us</h2>
+                    <p>Welcome to ShopOnME! We are dedicated to providing you with the best online shopping experience. Our team is passionate about delivering high-quality products and exceptional customer service. We believe in the power of technology to make shopping easier and more enjoyable for everyone.</p>
+                    <p>At ShopOnME, we offer a wide range of products to meet your needs. From the latest gadgets to everyday essentials, we have something for everyone. Our mission is to bring you the best products at competitive prices, with fast and reliable delivery.</p>
+                    <p>Thank you for choosing ShopAI. We look forward to serving you!</p>
+                </div>
+                <div class="footer-section faq" id="faq-section">
+                    <h2>FAQ</h2>
+                    <ul>
+                        <li><a href="#faq1">How do I place an order?</a></li>
+                        <li><a href="#faq2">What payment methods do you accept?</a></li>
+                        <li><a href="#faq3">How can I track my order?</a></li>
+                        <li><a href="#faq4">What is your return policy?</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section contact" id="contact-section">
+                    <h2>Contact Us</h2>
+                    <p>Email: support@shoponme.com</p>
+                    <p>Phone: +9673280015</p>
+                    <p>Address: WCQV+8H9, Tagudin, 2714 Ilocos Sur</p>
+                </div>
+                <div class="members-section member" id="member-section">
+                    <h2>Group Members</h2>
+                    <p>Mark Lawrence V. Cortez</p>
+                    <p>Aaron Jake Fabros</p>
+                    <p>Nikko Reyes II</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 ShopOnME. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <button class="back-to-top" id="back-to-top" onclick="scrollToTop()">Back to Top</button>
+    </div>
+
+    <script src="script/script.js"></script>
+</body>
+</html>
