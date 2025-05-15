@@ -4,34 +4,69 @@ document.getElementById('hamburger-menu').addEventListener('click', function () 
     navLinks.classList.toggle('show');
 });
 
-// User Popover
-function toggleUserPopover() {
+// Ensure all popovers are hidden on page load
+window.onload = function () {
+    const loginPopover = document.getElementById('loginPopover');
+    const signupPopover = document.getElementById('signupPopover');
     const userPopover = document.getElementById('userPopover');
     const cartPopover = document.getElementById('cartPopover');
 
-    // Close the cart popover if it's open
-    if (!cartPopover.classList.contains('hidden')) {
-        cartPopover.classList.add('hidden');
-    }
+    // Hide all popovers
+    loginPopover.style.display = 'none';
+    signupPopover.style.display = 'none';
+    userPopover.classList.add('hidden');
+    cartPopover.classList.add('hidden');
+};
 
-    // Toggle the user popover
+// Popover
+function closeLoginPopover() {
+    const loginPopover = document.getElementById('loginPopover');
+    loginPopover.style.display = 'none';
+}
+
+function closeSignupPopover() {
+    const signupPopover = document.getElementById('signupPopover');
+    signupPopover.style.display = 'none';
+}
+
+function hideAllPopovers() {
+    const loginPopover = document.getElementById('loginPopover');
+    const signupPopover = document.getElementById('signupPopover');
+    const userPopover = document.getElementById('userPopover');
+    const cartPopover = document.getElementById('cartPopover');
+
+    // Hide all popovers
+    loginPopover.style.display = 'none';
+    signupPopover.style.display = 'none';
+    userPopover.classList.add('hidden');
+    cartPopover.classList.add('hidden');
+}
+
+function showLoginPopover() {
+    hideAllPopovers();
+    const loginPopover = document.getElementById('loginPopover');
+    loginPopover.style.display = 'flex';
+}
+
+function showSignupPopover() {
+    hideAllPopovers();
+    const signupPopover = document.getElementById('signupPopover');
+    signupPopover.style.display = 'flex';
+}
+
+function toggleUserPopover() {
+    hideAllPopovers();
+    const userPopover = document.getElementById('userPopover');
     userPopover.classList.toggle('hidden');
 }
 
-// Cart Popover
 function toggleCartPopover() {
+    hideAllPopovers();
     const cartPopover = document.getElementById('cartPopover');
-    const userPopover = document.getElementById('userPopover');
-
-    // Close the user popover if it's open
-    if (!userPopover.classList.contains('hidden')) {
-        userPopover.classList.add('hidden');
-    }
-
-    // Toggle the cart popover
     cartPopover.classList.toggle('hidden');
 }
 
+// Cart functionality
 let cart = [];
 let total = 0;
 

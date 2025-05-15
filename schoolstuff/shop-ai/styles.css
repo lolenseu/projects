@@ -197,6 +197,171 @@ body {
     background-color: rgb(52, 114, 76);
 }
 
+/* Login Modal */
+.login-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-modal .hidden {
+    display: none;
+}
+
+.login-modal-content {
+    background-color: #fff;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.login-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.login-modal h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.login-modal label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+    text-align: left;
+}
+
+.login-modal input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 14px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.login-modal .login-btn {
+    background-color: rgb(86, 156, 113);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.login-modal .login-btn:hover {
+    background-color: rgb(52, 114, 76);
+}
+
+/* Signup Modal */
+.signup-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-modal-content {
+    background-color: #fff;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+    animation: fadeIn 0.3s ease;
+}
+
+.signup-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.signup-modal h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.signup-modal label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+    text-align: left;
+}
+
+.signup-modal input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.signup-modal .signup-btn {
+    background-color: rgb(86, 156, 113);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.signup-modal .signup-btn:hover {
+    background-color: rgb(52, 114, 76);
+}
+
 /* Cart */
 .cart-icon {
     background: none;
@@ -681,6 +846,13 @@ footer {
         text-align: center;
         height: 45px;
         width: auto;
+    }
+
+    .user-popover {
+        margin: 0px 20px;
+        right: 2px;
+        top: 480px;
+        width: 80%;
     }
     
     .cart-popover {

@@ -118,6 +118,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </header>
 
+        <div id="loginPopover" class="login-modal hidden">
+            <div class="login-modal-content">
+                <span class="login-close-btn" onclick="closeLoginPopover()">&times;</span>
+                <h3>Login</h3>
+                <form method="POST" action="index.php">
+                    <input type="hidden" name="action" value="login">
+                    <label for="loginUsername">Username</label>
+                    <input type="text" id="loginUsername" name="username" placeholder="Enter your username" required>
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required>
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="signupPopover" class="signup-modal hidden">
+            <div class="signup-modal-content">
+                <span class="signup-close-btn" onclick="closeSignupPopover()">&times;</span>
+                <h3>Signup</h3>
+                <form method="POST" action="index.php">
+                    <input type="hidden" name="action" value="signup">
+                    <label for="signupUsername">Username</label>
+                    <input type="text" id="signupUsername" name="username" placeholder="Enter your username" required>
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" name="email" placeholder="Enter your email" required>
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" name="password" placeholder="Enter your password" required>
+                    <button type="submit" class="signup-btn">Signup</button>
+                </form>
+            </div>
+        </div>
+
         <div class="first-container">
             <div class="slideshow-container">
                 <div class="mySlides fade">
