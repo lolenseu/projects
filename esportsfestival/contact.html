@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ContactUs</title>
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/contact.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/emmabot.css">
+  <link rel="icon" href="img/icon.png">
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <a href="#" class="logo"><img src="img/2024.png">ESports<br>Festival</a>
+    <div class="header-right">
+      <a href="index.html">Home</a>
+      <a href="about.php">About</a>
+      <a href="register.html">Register</a>
+      <a class="active" href="contact.html">ContactUs</a>
+    </div><br>
+    <div class="searchbox">
+      <form action="php/search_handler.php" method="GET">
+        <button type="submit">Search</button>
+        <input type="text" name="search" placeholder="Enter a keyword..." required>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Content -->
+  <div class="content">
+    <div class="content-box">
+      <h2 class="ani">Join Esports Festival</h2>
+      <p class="ani">If you have any questions regarding the ESports Festival, feel free to reach us at</p>  
+      <div class="contact-info ani">
+        <div class="email">
+          <i class="fas fa-envelope"></i>
+          <h2>esports@festival.com</h2>
+        </div>
+        <div class="phone ani">
+          <i class="fas fa-phone"></i>
+          <h2>+639954996063</h2>
+        </div>
+      </div>
+
+      <div class="second-content">
+        <h2 class="ani">Leave a Message</h2>
+        <form action="php/response_handler.php" method="post">
+          <div class="form-group ani">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Username*" required>
+          </div>
+          <div class="form-group ani">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Email*" required>
+          </div>
+          <div class="form-group ani">
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" placeholder="Message*" rows="4" cols="50" required></textarea>
+          </div>
+          <button class="ani" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- emma bot -->
+  <div class="chatbot-button-container">
+    <button popovertarget="chat-container" class="chatbot-button ani">AskEmma</button>
+  </div>
+
+  <div popover id="chat-container" class="chatbot-chat-container">
+    <h2 class="emmatag">EmmaAI you're Assistant</h2>
+    <div class="message-box" id="messagebox"></div>
+    <input class="user-input" type="text" id="userinput" placeholder="Type your message here...">
+    <button class="user-button" onclick="sendMessage()">Send</button>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <h4>© Copyright 2024 | ESports Festival</h4>
+  </footer>
+
+  <!-- Script -->
+  <script src="javascript/script.js"></script>
+  <script src="javascript/emmabot.js"></script>
+</body>
+</html>

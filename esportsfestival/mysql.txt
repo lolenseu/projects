@@ -1,0 +1,78 @@
+CREATE DATABASE esportsdb;
+
+USE esportsdb;
+
+CREATE TABLE users_data (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
+    email VARCHAR(255) NULL,
+    password VARCHAR(255) NOT NULL,
+    contact VARCHAR(255) NULL,
+    birthday DATE NULL,
+    age INT(11) NULL,
+    address TEXT NULL,
+    role VARCHAR(50) DEFAULT 'User',
+    image LONGBLOB NULL,
+    verification_status VARCHAR(50) NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO users_data (username, email, password, contact, birthday, age, address, role, image, created_at)
+VALUES
+('Emma', 'emma@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1985-03-22', 39, '123 Main St, Springfield, IL', 'User', NULL, '2022-04-25 10:30:45'),
+('Olivia', 'olivia@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '2002-07-15', 22, '456 Elm St, Shelbyville, TN', 'Sponsor', NULL, '2023-02-12 19:45:10'),
+('Ava', 'ava@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1993-10-30', 30, '789 Maple Ave, Smallville, KS', 'Speaker', NULL, '2022-08-01 14:10:20'),
+('Isabella', 'isabella@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1990-04-11', 34, '101 Oak Dr, Metropolis, NY', 'Player', NULL, '2023-11-27 09:35:00'),
+('Sophia', 'sophia@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1978-01-06', 46, '202 Pine Rd, Gotham City, NJ', 'User', NULL, '2022-05-15 16:40:30'),
+('Mia', 'mia@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1988-09-14', 35, '303 Birch St, Star City, CA', 'Sponsor', NULL, '2023-06-18 11:55:45'),
+('Charlotte', 'charlotte@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1995-05-20', 29, '404 Cedar Ct, Coast City, OR', 'Speaker', NULL, '2022-09-24 13:15:10'),
+('Abigail', 'abigail@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1975-12-02', 49, '505 Walnut Ave, Central City, CO', 'Player', NULL, '2023-01-07 18:50:25'),
+('Emily', 'emily@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1980-11-17', 44, '606 Aspen Blvd, Blüdhaven, MI', 'User', NULL, '2022-06-30 09:25:00'),
+('Harper', 'harper@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1998-02-25', 26, '707 Redwood St, Riverdale, KY', 'Sponsor', NULL, '2023-04-16 15:40:10'),
+('Evelyn', 'evelyn@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1992-06-18', 32, '909 Elm St, Metropolis, IL', 'Speaker', NULL, '2022-10-11 11:30:45'),
+('Hannah', 'hannah@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1984-08-25', 40, '1010 Oak Rd, Star City, CA', 'Player', NULL, '2023-07-25 19:55:00'),
+('Lily', 'lily@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '2001-01-14', 23, '111 Birch Ln, Smallville, KS', 'User', NULL, '2022-03-19 16:40:10'),
+('Madison', 'madison@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1996-11-29', 28, '121 Pine Ct, Shelbyville, TN', 'Sponsor', NULL, '2023-09-01 14:20:45'),
+('Victoria', 'victoria@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1989-12-07', 35, '131 Cedar Blvd, Coast City, OR', 'Speaker', NULL, '2022-01-28 09:50:25'),
+('Jessica', 'jessica@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1979-05-02', 45, '141 Redwood Ave, Riverdale, KY', 'Player', NULL, '2023-05-22 18:10:00'),
+('Samantha', 'samantha@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '2004-02-27', 20, '151 Aspen Rd, Central City, CO', 'User', NULL, '2022-07-04 13:40:30'),
+('Avery', 'avery@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1994-10-18', 30, '161 Maple Ln, Blüdhaven, MI', 'Sponsor', NULL, '2023-03-12 19:25:00'),
+('Riley', 'riley@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1986-07-09', 38, '171 Elm Ave, Gotham City, NJ', 'Speaker', NULL, '2022-11-09 16:30:45'),
+('Zoey', 'zoey@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1990-05-11', 34, '181 Maple St, Gotham, NY', 'Player', NULL, '2023-08-29 10:50:10'),
+('Julia', 'julia@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1982-02-27', 42, '191 Oak Ave, Springfield, IL', 'User', NULL, '2022-12-15 11:40:00'),
+('Grace', 'grace@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1997-08-19', 27, '201 Pine St, Shelbyville, TN', 'Sponsor', NULL, '2023-04-02 18:30:45'),
+('Sydney', 'sydney@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1985-04-21', 39, '211 Cedar Ln, Smallville, KS', 'Speaker', NULL, '2022-06-11 14:50:10'),
+('Natalie', 'natalie@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1999-03-15', 25, '221 Redwood Ave, Metropolis, NY', 'Player', NULL, '2023-09-25 10:20:45'),
+('Katherine', 'katherine@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1977-09-02', 47, '231 Maple St, Gotham City, NJ', 'User', NULL, '2022-08-08 16:40:00'),
+('Elizabeth', 'elizabeth@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1981-01-09', 43, '241 Elm Ave, Star City, CA', 'Sponsor', NULL, '2023-05-01 19:25:10'),
+('Mackenzie', 'mackenzie@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1995-06-28', 29, '251 Oak Rd, Coast City, OR', 'Speaker', NULL, '2022-04-22 11:30:45'),
+('Madelyn', 'madelyn@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1983-10-12', 41, '261 Pine Ct, Riverdale, KY', 'Player', NULL, '2023-07-12 14:50:00'),
+('Lauren', 'lauren@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1991-03-29', 33, '271 Cedar Blvd, Central City, CO', 'User', NULL, '2022-09-19 18:40:45'),
+('Kayla', 'kayla@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1987-05-31', 37, '281 Redwood St, Blüdhaven, MI', 'Sponsor', NULL, '2023-02-27 15:30:10'),
+('Alexis', 'alexis@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1992-01-13', 32, '291 Maple Ave, Gotham, NY', 'Speaker', NULL, '2022-10-25 11:10:45'),
+('Taylor', 'taylor@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1989-08-22', 35, '301 Oak St, Springfield, IL', 'Player', NULL, '2023-06-10 18:50:00'),
+('Hailey', 'hailey@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1994-04-03', 30, '311 Pine Ln, Shelbyville, TN', 'User', NULL, '2022-05-15 14:30:45'),
+('Jasmine', 'jasmine@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1986-02-14', 38, '321 Cedar Blvd, Smallville, KS', 'Sponsor', NULL, '2023-03-05 19:40:10'),
+('Destiny', 'destiny@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1997-09-27', 27, '331 Redwood Ave, Metropolis, NY', 'Speaker', NULL, '2022-07-24 16:50:00'),
+('Morgan', 'morgan@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1984-11-18', 40, '341 Maple St, Gotham City, NJ', 'Player', NULL, '2023-01-16 11:20:45'),
+('Rachel', 'rachel@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1990-06-01', 34, '351 Oak Rd, Star City, CA', 'User', NULL, '2022-09-04 14:10:00'),
+('Savannah', 'savannah@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1988-03-17', 36, '361 Pine Ct, Coast City, OR', 'Sponsor', NULL, '2023-08-14 19:30:45'),
+('Lillian', 'lillian@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1993-12-08', 31, '371 Cedar Ln, Riverdale, KY', 'Speaker', NULL, '2022-04-24 16:40:10'),
+('Gwendolyn', 'gwendolyn@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1985-07-05', 39, '381 Redwood Blvd, Central City, CO', 'Player', NULL, '2023-05-07 11:50:00'),
+('Aubrey', 'aubrey@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1996-03-09', 28, '391 Maple Ave, Blüdhaven, MI', 'User', NULL, '2022-01-10 18:30:45'),
+('Raven', 'raven@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1982-11-25', 42, '401 Oak St, Gotham, NY', 'Sponsor', NULL, '2023-09-19 15:10:00'),
+('Londyn', 'londyn@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1998-05-21', 26, '411 Pine Ln, Springfield, IL', 'Speaker', NULL, '2022-06-16 11:40:45'),
+('Reese', 'reese@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1989-09-24', 35, '421 Cedar Blvd, Shelbyville, TN', 'Player', NULL, '2023-04-14 19:20:10'),
+('Cameron', 'cameron@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1991-02-17', 33, '431 Redwood Ave, Smallville, KS', 'User', NULL, '2022-08-11 16:30:00'),
+('Paisley', 'paisley@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1987-06-13', 37, '441 Maple St, Metropolis, NY', 'Sponsor', NULL, '2023-07-09 14:40:45'),
+('Wren', 'wren@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1994-01-28', 30, '451 Oak Rd, Gotham City, NJ', 'Speaker', NULL, '2022-03-21 11:10:00'),
+('Kalliope', 'kalliope@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1983-04-15', 41, '461 Pine Ct, Star City, CA', 'Player', NULL, '2023-02-20 18:50:45'),
+('Daphne', 'daphne@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1995-10-02', 29, '471 Cedar Ln, Coast City, OR', 'User', NULL, '2022-05-28 14:20:10'),
+('Sasha', 'sasha@gmail.com', '$2y$10$2D414MPNXNAfd77VVN/rHuMfh25F.jN7waFRqE3.ttrUBlMl48LI6', '0987654321', '1981-07-31', 43, '481 Redwood Blvd, Riverdale, KY', 'Sponsor', NULL, '2023-10-03 15:30:00');
+
+CREATE TABLE web_views (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    views INT DEFAULT 0
+);
+
+INSERT INTO web_views (views) VALUES (0);
