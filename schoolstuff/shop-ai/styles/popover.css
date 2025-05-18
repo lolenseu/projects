@@ -1,230 +1,164 @@
 /* Popover */
-/* User Popover */
-.user-popover {
-    position: absolute;
-    top: 120px;
-    right: 200px;
-    width: 280px;
-    background-color: white;
+/* User Popover Container */
+.user-container {
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    background-color: #fff;
     border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
     border-radius: 14px;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
+    width: 300px;
     z-index: 1000;
-    display: flex;
-    max-height: 250px;
-    flex-direction: column;
-    gap: 15px;
-    overflow-y: auto;
+    padding: 15px;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
-.user-popover.hidden {
-    display: none;
+.user-close-btn {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
 }
 
-.user-popover h3 {
-    margin: 0;
+.user-close-btn:hover {
+    color: #000;
+}
+
+.user-container h3 {
     font-size: 18px;
-    color: #333;
-    text-align: center;
+    font-weight: bold;
     margin-bottom: 15px;
+    text-align: center;
+    color: #333;
 }
 
-.user-popover .dropdown-btn {
+.dropdown-btn {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    margin: 10px 0;
     background-color: rgb(86, 156, 113);
-    color: white;
+    color: #fff;
     border: none;
+    border-radius: 16px;
+    text-align: center;
     font-size: 16px;
-    border-radius: 14px;
-    padding: 10px 20px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.user-popover .dropdown-btn:hover {
-    background-color: rgb(52, 114, 76);
+.dropdown-btn:hover {
+    background-color: rgb(52, 114, 76)
 }
 
-/* Login */
-.login-modal {
-    display: none;
+/* Login and Signup Popover Containers */
+.login-container, .signup-container {
     position: fixed;
-    z-index: 9999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.login-modal .hidden {
-    display: none;
-}
-
-.login-modal-content {
+    top: 50px;
+    right: 20px;
     background-color: #fff;
-    padding: 30px;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    border-radius: 10px;
-    position: relative;
-    animation: fadeIn 0.3s ease;
+    border: 1px solid #ccc;
+    border-radius: 14px;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
+    width: 300px;
+    z-index: 1000;
+    padding: 15px;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-.login-close-btn {
+.login-close-btn, .signup-close-btn {
     position: absolute;
-    top: 10px;
+    top: 5px;
     right: 15px;
-    font-size: 24px;
+    font-size: 28px;
+    background: none;
+    border: none;
     cursor: pointer;
+    color: #888;
+}
+
+.login-close-btn:hover, .signup-close-btn:hover {
+    color: #000;
+}
+
+.login-container h3, .signup-container h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
     color: #333;
 }
 
-.login-modal h3 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.login-modal label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #333;
-    text-align: left;
-}
-
-.login-modal input {
+.login-container input[type="text"],
+.login-container input[type="password"],
+.signup-container input[type="text"],
+.signup-container input[type="email"],
+.signup-container input[type="password"] {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
+    margin: 10px 0;
+    border: 1px solid #ccc;
     border-radius: 14px;
     font-size: 14px;
     box-sizing: border-box;
 }
 
-.login-modal .login-btn {
-    background-color: rgb(86, 156, 113);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 14px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    width: 100%;
-}
-
-.login-modal .login-btn:hover {
-    background-color: rgb(52, 114, 76);
-}
-
-/* Signup */
-.signup-modal {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.signup-modal-content {
-    background-color: #fff;
-    padding: 30px;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    border-radius: 10px;
-    position: relative;
-    animation: fadeIn 0.3s ease;
-}
-
-.signup-close-btn {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 24px;
-    cursor: pointer;
-    color: #333;
-}
-
-.signup-modal h3 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.signup-modal label {
+.login-btn, .signup-btn {
     display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #333;
-    text-align: left;
-}
-
-.signup-modal input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 16px;
-    font-size: 14px;
-    box-sizing: border-box;
-}
-
-.signup-modal .signup-btn {
+    padding: 10px 15px;
+    margin: 10px 0;
     background-color: rgb(86, 156, 113);
-    color: white;
+    color: #fff;
     border: none;
-    padding: 10px 20px;
     border-radius: 16px;
-    cursor: pointer;
+    text-align: center;
     font-size: 16px;
+    cursor: pointer;
     transition: background-color 0.3s ease;
-    width: 100%;
 }
 
-.signup-modal .signup-btn:hover {
+.login-btn:hover, .signup-btn:hover {
     background-color: rgb(52, 114, 76);
 }
 
 /* Cart Popover */
 .cart-popover {
-    position: absolute;
-    top: 120px;
-    right: 100px;
+    position: fixed;
+    top: 50px;
+    right: 20px;
     width: 400px;
     background-color: white;
     border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
     padding: 28px;
     border-radius: 14px;
     z-index: 1000;
     max-height: 360px;
     overflow-y: auto;
+    animation: fadeIn 0.3s ease-in-out;
 }
+
+.cart-close-btn {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+}
+
+.cart-close-btn:hover {
+    color: #000;
+}
+
 
 .cart-popover h3 {
     margin-top: 0;
@@ -255,7 +189,7 @@
     margin-bottom: 10px;
 }
 
-.cart-popover button {
+.cart-button {
     margin-left: auto;
     background-color: rgb(86, 156, 113);
     color: white;
@@ -266,6 +200,18 @@
     cursor: pointer;
 }
 
-.cart-popover button:hover {
+.cart-button:hover {
     background-color: rgb(86, 156, 113);
+}
+
+/* Animation for Popovers */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

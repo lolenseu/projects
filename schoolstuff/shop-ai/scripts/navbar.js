@@ -42,7 +42,7 @@ function updateCartUI() {
         li.innerHTML = `
             <img src="${item.img}" alt="${item.name}" class="cart-img">
             <span>${item.name}</span> - <span>&#8369;${item.price.toFixed(2)}</span>
-            <button onclick="removeFromCart(${index})">Remove</button>
+            <button class="cart-button" onclick="removeFromCart(${index})">Remove</button>
         `;
         cartItems.appendChild(li);
     });

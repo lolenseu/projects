@@ -22,25 +22,24 @@
 /* Add Product Popover */
 .add-product-popover-container {
     background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
     padding: 30px 4%;
     width: 400px;
     max-width: 90%;
     z-index: 1000;
     border: 1px solid #ccc;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    translate: -85% -50%;
-    transition: all 0.3s ease;
+    top: 50px;
+    right: 20px;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 /* Close Button */
 .add-product-popover-close-btn {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 5px;
+    right: 15px;
     font-size: 28px;
     background: none;
     border: none;
@@ -151,24 +150,23 @@
 /* Edit Product Popover */
 .edit-product-popover-container {
     background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
     padding: 30px 4%;
     width: 400px;
     max-width: 90%;
     z-index: 1000;
     border: 1px solid #ccc;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    translate: -85% -50%;
-    transition: all 0.3s ease;
+    top: 50px;
+    right: 20px;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 .edit-product-popover-close-btn {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 5px;
+    right: 15px;
     font-size: 28px;
     background: none;
     border: none;
@@ -209,4 +207,16 @@
 
 .edit-product-form button[type="submit"]:hover {
     background-color: #2980b9;
+}
+
+/* Animation for Popovers */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

@@ -1,12 +1,27 @@
 <?php
+// Start the session
+session_start();
+
 // Database connection
 include 'connection.php';
+
+// Check if the user is logged in
+$isLoggedIn = isset($_SESSION['user_id']);
+$userData = null;
 
 // Fetch products from the database
 $sql = "SELECT * FROM products";
 $result = $conn->query($sql);
 
-// Check if the user is logged in
+if ($isLoggedIn) {
+    // Fetch user data if logged in
+    $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt->bind_param("i", $_SESSION['user_id']);
+    $stmt->execute();
+    $userData = $stmt->get_result()->fetch_assoc();
+}
+
+// Handle login and signup actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
         $action = $_POST['action'];
@@ -46,16 +61,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $user = $result->fetch_assoc();
 
                 if (password_verify($password, $user['password'])) {
-                    echo "<script>alert('Login successful');</script>";
-                    // Set session or cookie for logged-in user
-                    session_start();
+                    // Set session for logged-in user
                     $_SESSION['user_id'] = $user['id'];
+                    echo "<script>alert('Login successful');</script>";
+                    header("Location: index.php"); // Refresh the page
+                    exit();
                 } else {
                     echo "<script>alert('Invalid password');</script>";
                 }
             } else {
                 echo "<script>alert('User not found');</script>";
             }
+        } elseif ($action === 'logout') {
+            // Handle logout
+            session_destroy();
+            header("Location: index.php"); // Redirect to the homepage
+            exit();
         }
     }
 }
@@ -75,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="styles/popover.css" rel="stylesheet">
     <link href="styles/containers.css" rel="stylesheet">
     <link href="styles/mobile.css" rel="stylesheet">
+    <link href="styles/emmabot.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -98,7 +120,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li><a href="#faq-section" id="faq">FAQ</a></li>
                 <li><a href="#contact-section" id="contact">Contact</a></li>
                 <li>
-                    <button popovertarget="userPopover" id="userButton" class="user-icon">👤</button>
+                    <?php if ($isLoggedIn): ?>
+                        <!-- Profile Button -->
+                        <button popovertarget="profilePopover" id="profileButton" class="profile-icon">
+                            <img src="img/default-profile.png" alt="Profile" class="profile-img">
+                        </button>
+                    <?php else: ?>
+                        <!-- Login Button -->
+                        <button popovertarget="userPopover" id="userButton" class="user-icon">👤</button>
+                    <?php endif; ?>
                 </li>
                 <li>
                     <button popovertarget="cartPopover" id="cartButton" class="cart-icon">
@@ -107,23 +137,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </li>
             </ul>
 
-            <div popover id="userPopover" class="user-popover">
+            <!-- Header Popovers -->
+            <div popover id="userPopover" class="user-container">
+                <button popovertarget="userPopover" popovertargetaction="hide" class="user-close-btn" aria-label="Close">&times;</button>
                 <h3>Options</h3>
-                <button class="dropdown-btn" onclick="showLoginPopover()">Login</button>
-                <button class="dropdown-btn" onclick="showSignupPopover()">Signup</button>
+                <button class="dropdown-btn" popovertarget="loginPopover">Login</button>
+                <button class="dropdown-btn" popovertarget="signupPopover">Signup</button>
+            </div>
+
+            <div popover id="profilePopover" class="profile-container">
+                <button popovertarget="profilePopover" popovertargetaction="hide" class="profile-close-btn" aria-label="Close">&times;</button>
+                <h3>Profile Options</h3>
+                <button class="dropdown-btn" onclick="editProfile()">Edit Profile</button>
+                <form method="POST" action="index.php" style="display: inline;">
+                    <input type="hidden" name="action" value="logout">
+                    <button type="submit" class="dropdown-btn">Logout</button>
+                </form>
             </div>
 
             <div popover id="cartPopover" class="cart-popover">
+                <button popovertarget="cartPopover" popovertargetaction="hide" class="cart-close-btn" aria-label="Close">&times;</button>
                 <h3>Shopping Cart</h3>
                 <ul id="cartItems"></ul>
                 <p id="cartTotal">Total: &#8369;0.00</p>
-                <button onclick="clearCart()">Clear Cart</button>
+                <button onclick="clearCart()" class="cart-button">Clear Cart</button>
             </div>
         </header>
 
-        <div id="loginPopover" class="login-modal hidden">
+        <div popover id="loginPopover" class="login-container">
             <div class="login-modal-content">
-                <span class="login-close-btn" onclick="closeLoginPopover()">&times;</span>
+                <button popovertarget="loginPopover" popovertargetaction="hide" class="login-close-btn" aria-label="Close">&times;</button>
                 <h3>Login</h3>
                 <form method="POST" action="index.php">
                     <input type="hidden" name="action" value="login">
@@ -136,9 +179,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
 
-        <div id="signupPopover" class="signup-modal hidden">
+        <div popover id="signupPopover" class="signup-container">
             <div class="signup-modal-content">
-                <span class="signup-close-btn" onclick="closeSignupPopover()">&times;</span>
+                <button popovertarget="signupPopover" popovertargetaction="hide" class="signup-close-btn" aria-label="Close">&times;</button>
                 <h3>Signup</h3>
                 <form method="POST" action="index.php">
                     <input type="hidden" name="action" value="signup">
@@ -223,7 +266,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Modal Product -->
         <div id="productModal" class="product-modal">
-            <div class="product-modal-content">
+            <div class="product-modal-content" id="productModal">
                 <span class="product-close-btn" onclick="closeModal()">&times;</span>
                 <img id="modalImage" src="" alt="Product Image">
                 <h3 id="modalTitle">Product Name</h3>
@@ -309,7 +352,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="footer-section contact" id="contact-section">
                     <h2>Contact Us</h2>
-                    <p>Email: support@ShopAI.com</p>
+                    <p>Email: support@shopai.com</p>
                     <p>Phone: +9673280015</p>
                     <p>Address: WCQV+8H9, Tagudin, 2714 Ilocos Sur</p>
                 </div>
@@ -319,11 +362,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </footer>
 
+        <!-- Emma bot -->
+        <div class="chatbot-button-container">
+            <button popovertarget="chat-container" class="chatbot-button ani">AskEmma</button>
+        </div>
+
+        <div popover id="chat-container" class="chatbot-chat-container">
+            <button popovertarget="chat-container" popovertargetaction="hide" class="chat-close-btn" aria-label="Close">&times;</button>
+            <h2 class="emmatag">EmmaAI you're Assistant</h2>
+            <div class="message-box" id="messagebox"></div>
+            <input class="user-input" type="text" id="userinput" placeholder="Type your message here...">
+            <button class="user-button" onclick="sendMessage()">Send</button>
+         </div>
+
+        <!-- Back to Top Button -->
         <button class="back-to-top" id="back-to-top" onclick="scrollToTop()">Back to Top</button>
     </div>
 
     <script src="scripts/script.js"></script>
     <script src="scripts/navbar.js"></script>
     <script src="scripts/popover.js"></script>
+    <script src="scripts/emmabot.js"></script>
 </body>
 </html>
