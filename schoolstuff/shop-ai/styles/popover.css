@@ -1,0 +1,271 @@
+/* Popover */
+/* User Popover */
+.user-popover {
+    position: absolute;
+    top: 120px;
+    right: 200px;
+    width: 280px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 14px;
+    z-index: 1000;
+    display: flex;
+    max-height: 250px;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+}
+
+.user-popover.hidden {
+    display: none;
+}
+
+.user-popover h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.user-popover .dropdown-btn {
+    background-color: rgb(86, 156, 113);
+    color: white;
+    border: none;
+    font-size: 16px;
+    border-radius: 14px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.user-popover .dropdown-btn:hover {
+    background-color: rgb(52, 114, 76);
+}
+
+/* Login */
+.login-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-modal .hidden {
+    display: none;
+}
+
+.login-modal-content {
+    background-color: #fff;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.login-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.login-modal h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.login-modal label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+    text-align: left;
+}
+
+.login-modal input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 14px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.login-modal .login-btn {
+    background-color: rgb(86, 156, 113);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.login-modal .login-btn:hover {
+    background-color: rgb(52, 114, 76);
+}
+
+/* Signup */
+.signup-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-modal-content {
+    background-color: #fff;
+    padding: 30px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+    animation: fadeIn 0.3s ease;
+}
+
+.signup-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.signup-modal h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.signup-modal label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+    text-align: left;
+}
+
+.signup-modal input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.signup-modal .signup-btn {
+    background-color: rgb(86, 156, 113);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.signup-modal .signup-btn:hover {
+    background-color: rgb(52, 114, 76);
+}
+
+/* Cart Popover */
+.cart-popover {
+    position: absolute;
+    top: 120px;
+    right: 100px;
+    width: 400px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 28px;
+    border-radius: 14px;
+    z-index: 1000;
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+.cart-popover h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.cart-popover.hidden {
+    display: none;
+}
+
+.cart-popover .cart-img {
+    width: 128px;
+    height: 64px;
+    margin-right: 10px;
+}
+
+.cart-popover ul {
+    color: #333;
+    list-style: none;
+    padding: 5px;
+    margin: 5px;
+}
+
+.cart-popover li {
+    color: #333;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.cart-popover button {
+    margin-left: auto;
+    background-color: rgb(86, 156, 113);
+    color: white;
+    border: none;
+    font-size: 18px;
+    border-radius: 14px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.cart-popover button:hover {
+    background-color: rgb(86, 156, 113);
+}

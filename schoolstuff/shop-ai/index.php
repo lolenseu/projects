@@ -1,5 +1,3 @@
-<!-- filepath: /home/lolenseu/VScode/projects/schoolstuff/shopai.com/index.php -->
-
 <?php
 // Database connection
 include 'connection.php';
@@ -69,9 +67,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShopAI</title>
+
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link href="styles.css" rel="stylesheet">
-    <link rel="icon" href="img/ShopAI.png" type="image/png">
+
+    <link href="styles/style.css" rel="stylesheet">
+    <link href="styles/navbar.css" rel="stylesheet">
+    <link href="styles/popover.css" rel="stylesheet">
+    <link href="styles/containers.css" rel="stylesheet">
+    <link href="styles/mobile.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -95,22 +98,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li><a href="#faq-section" id="faq">FAQ</a></li>
                 <li><a href="#contact-section" id="contact">Contact</a></li>
                 <li>
-                    <button id="userButton" class="user-icon" onclick="toggleUserPopover()">👤</button>
+                    <button popovertarget="userPopover" id="userButton" class="user-icon">👤</button>
                 </li>
                 <li>
-                    <button id="cartButton" class="cart-icon" onclick="toggleCartPopover()">
+                    <button popovertarget="cartPopover" id="cartButton" class="cart-icon">
                         🛒 <span id="cartCount">0</span>
                     </button>
                 </li>
             </ul>
 
-            <div id="userPopover" class="user-popover hidden">
+            <div popover id="userPopover" class="user-popover">
                 <h3>Options</h3>
                 <button class="dropdown-btn" onclick="showLoginPopover()">Login</button>
                 <button class="dropdown-btn" onclick="showSignupPopover()">Signup</button>
             </div>
 
-            <div id="cartPopover" class="cart-popover hidden">
+            <div popover id="cartPopover" class="cart-popover">
                 <h3>Shopping Cart</h3>
                 <ul id="cartItems"></ul>
                 <p id="cartTotal">Total: &#8369;0.00</p>
@@ -188,9 +191,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         if ($count % 3 == 0) {
                             echo '<div class="product-row">';
                         }
+                        
+                        // Convert image data to base64
+                        $imageData = base64_encode($row['image']);
+                        $imageSrc = "data:image/jpeg;base64," . $imageData;
                         ?>
-                        <div class="product" data-name="<?php echo $row['name']; ?>" data-price="<?php echo $row['price']; ?>" data-img="<?php echo $row['image']; ?>">
-                            <img src="<?php echo $row['image']; ?>" alt="<?php echo $row['name']; ?>" class="product-img">
+                        <div class="product" 
+                            data-name="<?php echo $row['name']; ?>" 
+                            data-price="<?php echo $row['price']; ?>" 
+                            data-img="<?php echo $imageSrc; ?>" 
+                            data-description="<?php echo htmlspecialchars($row['description']); ?>">
+                            <img src="<?php echo $imageSrc; ?>" alt="<?php echo $row['name']; ?>" class="product-img">
                             <h3><?php echo $row['name']; ?></h3>
                             <p>&#8369;<?php echo number_format($row['price'], 2); ?></p>
                         </div>
@@ -206,20 +217,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 } else {
                     echo "<p>No products available.</p>";
                 }
-                ?>
+            ?>
             </div>
         </div>
 
         <!-- Modal Product -->
-        <div id="productModal" class="custom-modal">
-            <div class="custom-modal-content">
-              <span class="custom-close-btn" onclick="closeModal()">&times;</span>
-              <img id="modalImage" src="" alt="Product Image">
-              <h3 id="modalTitle">Product Name</h3>
-              <p id="modalPrice">&#8369;0.00</p>
-              <button class="add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
+        <div id="productModal" class="product-modal">
+            <div class="product-modal-content">
+                <span class="product-close-btn" onclick="closeModal()">&times;</span>
+                <img id="modalImage" src="" alt="Product Image">
+                <h3 id="modalTitle">Product Name</h3>
+                <h5 id="modalDescription">Product Description</h5>
+                <p id="modalPrice">&#8369;0.00</p>
+                <button class="add-to-cart-btn" onclick="addToCart()">Add to Cart</button>
             </div>
-          </div>
+        </div>
 
         <div class="third-container" id="services-section">
             <h2 class="section-title">Our Services</h2>
@@ -310,6 +322,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button class="back-to-top" id="back-to-top" onclick="scrollToTop()">Back to Top</button>
     </div>
 
-    <script src="script.js"></script>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/navbar.js"></script>
+    <script src="scripts/popover.js"></script>
 </body>
 </html>

@@ -1,0 +1,160 @@
+/* Header */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    backdrop-filter: blur(10px);
+    background-color:rgba(18, 18, 18, 0.6);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 18%;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+.hamburger-menu {
+    display: none;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    transition: max-height 0.3s ease;
+}
+
+.nav-links.hidden {
+    display: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: rgb(86, 156, 113);
+}
+
+/* Logo */
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: 0.8s ease;
+}
+
+.logo:hover {
+    background: linear-gradient(
+        to right,
+        rgb(226, 226, 226),
+        rgb(138, 185, 156),
+        rgb(86, 150, 110),
+        rgb(86, 150, 110),
+        rgb(138, 185, 156),
+        rgb(226, 226, 226)
+    );
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: gradientAnimation 3s linear infinite;
+    }
+    
+    @keyframes gradientAnimation {
+    0% {
+        background-position: 200% 50%;
+    }
+    
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.search-container {
+    padding: 0px 25px;
+    display: flex;
+    gap: 10px;
+}
+
+.search-container input {
+    width: 300px;
+    padding: 14px;
+    border: none;
+    border-radius: 14px;
+    outline: none;
+    font-size: 16px;
+}
+
+.search-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 14px;
+    background-color: rgb(86, 156, 113);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-container button:hover {
+    background-color: rgb(52, 114, 76);
+}
+
+/* User Icon */
+.user-icon {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Cart Icon */
+.cart-icon {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: relative;
+}
+
+#cartCount {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    position: absolute;
+    top: -5px;
+    right: -10px;
+}
+
+#cartTotal {
+    color: #333;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}

@@ -1,5 +1,3 @@
-<!-- filepath: /home/lolenseu/VScode/projects/schoolstuff/shopai.com/connection.php -->
-
 <?php
 $host = 'localhost';
 $username = 'root';
