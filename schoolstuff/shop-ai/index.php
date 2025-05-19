@@ -1,85 +1,19 @@
 <?php
+
 // Start the session
 session_start();
 
 // Database connection
 include 'connection.php';
 
-// Check if the user is logged in
-$isLoggedIn = isset($_SESSION['user_id']);
-$userData = null;
+// Fetch products
+include 'products.php';
 
-// Fetch products from the database
-$sql = "SELECT * FROM products";
-$result = $conn->query($sql);
+// Fetch User
+include 'user.php';
 
-if ($isLoggedIn) {
-    // Fetch user data if logged in
-    $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
-    $stmt->bind_param("i", $_SESSION['user_id']);
-    $stmt->execute();
-    $userData = $stmt->get_result()->fetch_assoc();
-}
-
-// Handle login and signup actions
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['action'])) {
-        $action = $_POST['action'];
-
-        if ($action === 'signup' && isset($_POST['username'], $_POST['email'], $_POST['password'])) {
-            $username = $_POST['username'];
-            $email = $_POST['email'];
-            $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-
-            $checkUser = $conn->prepare("SELECT * FROM users WHERE email = ?");
-            $checkUser->bind_param("s", $email);
-            $checkUser->execute();
-            $result = $checkUser->get_result();
-
-            if ($result->num_rows > 0) {
-                echo "<script>alert('User already exists');</script>";
-            } else {
-                $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-                $stmt->bind_param("sss", $username, $email, $password);
-
-                if ($stmt->execute()) {
-                    echo "<script>alert('User registered successfully');</script>";
-                } else {
-                    echo "<script>alert('Failed to register user');</script>";
-                }
-            }
-        } elseif ($action === 'login' && isset($_POST['email'], $_POST['password'])) {
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-
-            $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            if ($result->num_rows > 0) {
-                $user = $result->fetch_assoc();
-
-                if (password_verify($password, $user['password'])) {
-                    // Set session for logged-in user
-                    $_SESSION['user_id'] = $user['id'];
-                    echo "<script>alert('Login successful');</script>";
-                    header("Location: index.php"); // Refresh the page
-                    exit();
-                } else {
-                    echo "<script>alert('Invalid password');</script>";
-                }
-            } else {
-                echo "<script>alert('User not found');</script>";
-            }
-        } elseif ($action === 'logout') {
-            // Handle logout
-            session_destroy();
-            header("Location: index.php"); // Redirect to the homepage
-            exit();
-        }
-    }
-}
+// Fetch Cart items
+include 'cart.php';
 ?>
 
 <!DOCTYPE html>
@@ -107,64 +41,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Enter product name...">
+                <input type="text" id="searchInput" placeholder="Enter product name..." oninput="fetchSuggestions()">
+                <div id="suggestions" class="suggestions-container"></div>
                 <button onclick="scrollToProduct()">Search</button>
             </div>
 
             <ul class="nav-links" id="nav-links">
-                <li><a href="index.html" id="home">Home</a></li>
+                <li><a href="#" id="home">Home</a></li>
                 <li><a href="#products-section">Products</a></li>
                 <li><a href="#services-section" id="services">Services</a></li>
                 <li><a href="#brands-section" id="brands">Brands</a></li>
                 <li><a href="#about-section" id="about">About</a></li>
                 <li><a href="#faq-section" id="faq">FAQ</a></li>
                 <li><a href="#contact-section" id="contact">Contact</a></li>
-                <li>
+            </ul>
+
+            <div class="top-container">
+                <div class="profile-container">
                     <?php if ($isLoggedIn): ?>
-                        <!-- Profile Button -->
-                        <button popovertarget="profilePopover" id="profileButton" class="profile-icon">
-                            <img src="img/default-profile.png" alt="Profile" class="profile-img">
-                        </button>
+                    <button popovertarget="profilePopover" id="profileButton" class="profile-icon">
+                        <?php
+                            $$profileImg = 'img/nopic.jpg'; // Default image
+                            if (!empty($_SESSION['profile_img'])) {
+                                $profileImg = 'data:image/jpeg;base64,' . base64_encode($_SESSION['profile_img']);
+                            }
+                        ?>
+                        <img src="<?php echo htmlspecialchars($profileImg); ?>" alt="Profile" class="profile-img">
+                    </button>
                     <?php else: ?>
-                        <!-- Login Button -->
                         <button popovertarget="userPopover" id="userButton" class="user-icon">👤</button>
                     <?php endif; ?>
-                </li>
-                <li>
+                </div>
+                <div class="cart-container">
                     <button popovertarget="cartPopover" id="cartButton" class="cart-icon">
                         🛒 <span id="cartCount">0</span>
                     </button>
-                </li>
-            </ul>
-
-            <!-- Header Popovers -->
-            <div popover id="userPopover" class="user-container">
-                <button popovertarget="userPopover" popovertargetaction="hide" class="user-close-btn" aria-label="Close">&times;</button>
-                <h3>Options</h3>
-                <button class="dropdown-btn" popovertarget="loginPopover">Login</button>
-                <button class="dropdown-btn" popovertarget="signupPopover">Signup</button>
-            </div>
-
-            <div popover id="profilePopover" class="profile-container">
-                <button popovertarget="profilePopover" popovertargetaction="hide" class="profile-close-btn" aria-label="Close">&times;</button>
-                <h3>Profile Options</h3>
-                <button class="dropdown-btn" onclick="editProfile()">Edit Profile</button>
-                <form method="POST" action="index.php" style="display: inline;">
-                    <input type="hidden" name="action" value="logout">
-                    <button type="submit" class="dropdown-btn">Logout</button>
-                </form>
-            </div>
-
-            <div popover id="cartPopover" class="cart-popover">
-                <button popovertarget="cartPopover" popovertargetaction="hide" class="cart-close-btn" aria-label="Close">&times;</button>
-                <h3>Shopping Cart</h3>
-                <ul id="cartItems"></ul>
-                <p id="cartTotal">Total: &#8369;0.00</p>
-                <button onclick="clearCart()" class="cart-button">Clear Cart</button>
+                </div>
             </div>
         </header>
 
-        <div popover id="loginPopover" class="login-container">
+        <!-- Header Popovers -->
+        <div popover id="userPopover" class="user-popover-container">
+            <button popovertarget="userPopover" popovertargetaction="hide" class="user-close-btn" aria-label="Close">&times;</button>
+            <h3>User Options</h3>
+            <button class="user-btn" popovertarget="loginPopover">Login</button>
+            <button class="user-btn" popovertarget="signupPopover">Signup</button>
+        </div>
+
+        <div popover id="loginPopover" class="login-popover-container">
             <div class="login-modal-content">
                 <button popovertarget="loginPopover" popovertargetaction="hide" class="login-close-btn" aria-label="Close">&times;</button>
                 <h3>Login</h3>
@@ -179,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
 
-        <div popover id="signupPopover" class="signup-container">
+        <div popover id="signupPopover" class="signup-popover-container">
             <div class="signup-modal-content">
                 <button popovertarget="signupPopover" popovertargetaction="hide" class="signup-close-btn" aria-label="Close">&times;</button>
                 <h3>Signup</h3>
@@ -196,6 +120,73 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
 
+        <div popover id="profilePopover" class="profile-popover-container">
+                <button popovertarget="profilePopover" popovertargetaction="hide" class="profile-close-btn" aria-label="Close">&times;</button>
+                <h3>Profile</h3>
+                <?php if ($isLoggedIn && $userData): ?>
+                    <div class="profile-info">
+                        <?php
+                            $profileImg = 'img/nopic.jpg';
+                            if (!empty($userData['profile_img'])) {
+                                $profileImg = 'data:image/jpeg;base64,' . base64_encode($userData['profile_img']);
+                            }
+                        ?>
+                        <img src="<?php echo htmlspecialchars($profileImg); ?>" alt="Profile" class="profile-img">
+                        <p><strong>Username:</strong></p>
+                        <p><?php echo htmlspecialchars($userData['username']); ?></p>
+                        <p><strong>Email:</strong></p>
+                        <p><?php echo htmlspecialchars($userData['email']); ?></p>
+                        <p><strong>Birthday:</strong></p>
+                        <p><?php echo htmlspecialchars($userData['birthday'] ?? ''); ?></p>
+                        <p><strong>Address:</strong></p>
+                        <p><?php echo htmlspecialchars($userData['address'] ?? ''); ?></p>
+                    </div>
+                    <button popovertarget="editPopover" class="profile-btn" style="margin-top:5px;">Edit Profile</button>
+                    <form method="POST" action="index.php" style="margin-top:10px;">
+                        <input type="hidden" name="action" value="logout">
+                        <button type="submit" class="profile-btn">Logout</button>
+                    </form>
+                <?php endif; ?>
+            </div>
+
+        <div popover id="editPopover" class="edit-popover-container">
+            <div class="edit-modal-content">
+                <button popovertarget="editPopover" popovertargetaction="hide" class="edit-close-btn" aria-label="Close">&times;</button>
+                <h3>Edit Profile</h3>
+                <form method="POST" action="index.php" enctype="multipart/form-data" onsubmit="return confirmProfileUpdate();">
+                    <input type="hidden" name="action" value="edit">
+                    <label for="editUsername">Username</label>
+                    <input type="text" id="editUsername" name="username" value="<?php echo htmlspecialchars($userData['username']); ?>">
+
+                    <label for="editEmail">Email</label>
+                    <input type="email" id="editEmail" name="email" value="<?php echo htmlspecialchars($userData['email']); ?>">
+                    
+                    <label for="editPassword">New Password</label>
+                    <input type="password" id="editPassword" name="password" placeholder="Leave blank to keep current">
+                    
+                    <label for="editAddress">Address</label>
+                    <input type="text" id="editAddress" name="address" value="<?php echo htmlspecialchars($userData['address'] ?? ''); ?>">
+                    
+                    <label for="editBirthday">Birthday</label>
+                    <input type="date" id="editBirthday" name="birthday" value="<?php echo htmlspecialchars($userData['birthday'] ?? ''); ?>">
+                    
+                    <label for="editImage">Profile Image</label>
+                    <input type="file" id="editImage" name="profile_img" accept="image/*">
+                    
+                    <button type="submit" class="edit-btn">Save Changes</button>
+                </form>
+            </div>
+        </div>
+
+        <div popover id="cartPopover" class="cart-popover-container">
+            <button popovertarget="cartPopover" popovertargetaction="hide" class="cart-close-btn" aria-label="Close">&times;</button>
+            <h3>Shopping Cart</h3>
+            <ul id="cartItems"></ul>
+            <p id="cartTotal">Total: &#8369;0.00</p>
+            <button onclick="clearCart()" class="cart-button">Clear Cart</button>
+        </div>
+
+        <!-- Main Content -->
         <div class="first-container">
             <div class="slideshow-container">
                 <div class="mySlides fade">
@@ -236,10 +227,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
                         
                         // Convert image data to base64
-                        $imageData = base64_encode($row['image']);
-                        $imageSrc = "data:image/jpeg;base64," . $imageData;
+                        $imageData = base64_encode($row['product_img']);
+                        $imageSrc = "data:product_img/jpeg;base64," . $imageData;
                         ?>
                         <div class="product" 
+                            data-id="<?php echo $row['id']; ?>"
                             data-name="<?php echo $row['name']; ?>" 
                             data-price="<?php echo $row['price']; ?>" 
                             data-img="<?php echo $imageSrc; ?>" 
@@ -379,6 +371,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button class="back-to-top" id="back-to-top" onclick="scrollToTop()">Back to Top</button>
     </div>
 
+    <script>
+        var isLoggedIn = <?php echo json_encode($isLoggedIn); ?>;
+    </script>
     <script src="scripts/script.js"></script>
     <script src="scripts/navbar.js"></script>
     <script src="scripts/popover.js"></script>

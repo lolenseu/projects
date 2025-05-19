@@ -1,6 +1,6 @@
 /* Popover */
-/* User Popover Container */
-.user-container {
+/* Popover Containers */
+.user-popover-container, .login-popover-container, .signup-popover-container {
     position: fixed;
     top: 50px;
     right: 20px;
@@ -14,7 +14,7 @@
     animation: fadeIn 0.3s ease-in-out;
 }
 
-.user-close-btn {
+.user-close-btn, .profile-close-btn, .login-close-btn, .signup-close-btn, .edit-close-btn {
     position: absolute;
     top: 5px;
     right: 15px;
@@ -25,11 +25,11 @@
     color: #888;
 }
 
-.user-close-btn:hover {
+.user-close-btn:hover, .login-close-btn:hover, .signup-close-btn:hover,  .profile-close-btn:hover, .cart-close-btn:hover, .edit-close-btn:hover {
     color: #000;
 }
 
-.user-container h3 {
+.user-popover-container h3, .login-popover-container h3, .signup-popover-container h3, .profile-popover-container h3, .edit-popover-container h3 {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 15px;
@@ -37,7 +37,7 @@
     color: #333;
 }
 
-.dropdown-btn {
+.user-btn, .login-btn, .signup-btn, .profile-btn, .edit-btn {
     display: block;
     width: 100%;
     padding: 10px 15px;
@@ -52,53 +52,21 @@
     transition: background-color 0.3s ease;
 }
 
-.dropdown-btn:hover {
-    background-color: rgb(52, 114, 76)
+.user-btn:hover, .login-btn:hover, .signup-btn:hover, .profile-btn:hover, .edit-btn:hover {
+    background-color: rgb(52, 114, 76);
 }
 
-/* Login and Signup Popover Containers */
-.login-container, .signup-container {
-    position: fixed;
-    top: 50px;
-    right: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 14px;
-    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
-    width: 300px;
-    z-index: 1000;
-    padding: 15px;
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-.login-close-btn, .signup-close-btn {
-    position: absolute;
-    top: 5px;
-    right: 15px;
-    font-size: 28px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #888;
-}
-
-.login-close-btn:hover, .signup-close-btn:hover {
-    color: #000;
-}
-
-.login-container h3, .signup-container h3 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    text-align: center;
-    color: #333;
-}
-
-.login-container input[type="text"],
-.login-container input[type="password"],
-.signup-container input[type="text"],
-.signup-container input[type="email"],
-.signup-container input[type="password"] {
+/* Input Design */
+.login-popover-container input[type="text"],
+.login-popover-container input[type="password"],
+.signup-popover-container input[type="text"],
+.signup-popover-container input[type="email"],
+.signup-popover-container input[type="password"],
+.edit-popover-container input[type="text"],
+.edit-popover-container input[type="password"],
+.edit-popover-container input[type="email"],
+.edit-popover-container input[type="date"],
+.edit-popover-container input[type="file"] {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -108,38 +76,103 @@
     box-sizing: border-box;
 }
 
-.login-btn, .signup-btn {
-    display: block;
-    width: 100%;
-    padding: 10px 15px;
-    margin: 10px 0;
-    background-color: rgb(86, 156, 113);
-    color: #fff;
-    border: none;
-    border-radius: 16px;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.login-btn:hover, .signup-btn:hover {
-    background-color: rgb(52, 114, 76);
-}
-
-/* Cart Popover */
-.cart-popover {
+/* Profile Popover */
+.profile-popover-container {
     position: fixed;
     top: 50px;
     right: 20px;
-    width: 400px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 14px;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
+    width: 500px;
+    z-index: 1000;
+    padding: 15px;
+    animation: fadeIn 0.3s ease-in-out;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.profile-info .profile-img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #569c71;
+    margin-bottom: 18px;
+    box-shadow: 0 2px 12px rgba(86,156,113,0.18);
+}
+
+.profile-info-label {
+    font-size: 15px;
+    color: #888;
+    margin-top: 8px;
+    margin-bottom: 0;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.profile-info-value {
+    font-size: 20px;
+    color: #222;
+    margin-bottom: 10px;
+    font-weight: 600;
+    word-break: break-all;
+    text-align: center;
+}
+
+/* Edit Popover */
+.edit-popover-container {
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18), 0 0 0 9999px rgba(0,0,0,0.5);
+    width: 500px;
+    z-index: 1000;
+    padding: 32px 28px 24px 28px;
+    animation: fadeIn 0.3s ease-in-out;
+    text-align: center;
+}
+
+.edit-modal-content {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.edit-popover-container label {
+    display: block;
+    text-align: left;
+    margin-bottom: 6px;
+    margin-top: 8px;
+    color: #2d4739;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* Cart Popover */
+.cart-popover-container {
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    width: 650px;
     background-color: white;
     border: 1px solid #ccc;
     box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
     padding: 28px;
     border-radius: 14px;
     z-index: 1000;
-    max-height: 360px;
+    max-height: 600px;
     overflow-y: auto;
     animation: fadeIn 0.3s ease-in-out;
 }
@@ -155,38 +188,40 @@
     color: #888;
 }
 
-.cart-close-btn:hover {
-    color: #000;
-}
-
-
-.cart-popover h3 {
+.cart-popover-container h3 {
     margin-top: 0;
     color: #333;
 }
 
-.cart-popover.hidden {
+.cart-popover-container.hidden {
     display: none;
 }
 
-.cart-popover .cart-img {
+.cart-popover-container .cart-img {
     width: 128px;
     height: 64px;
     margin-right: 10px;
 }
 
-.cart-popover ul {
+.cart-popover-container ul {
     color: #333;
     list-style: none;
     padding: 5px;
     margin: 5px;
 }
 
-.cart-popover li {
+.cart-popover-container li {
     color: #333;
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+}
+
+.cart-img {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 6px;
 }
 
 .cart-button {

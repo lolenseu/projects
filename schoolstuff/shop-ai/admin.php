@@ -1,6 +1,14 @@
-<!-- filepath: /opt/lampp/htdocs/projects/shop-ai/admin.php -->
 <?php
+
+// Start the session
+session_start();
+
+// Database connection
 include 'connection.php';
+
+// Fetch Products
+$sql = "SELECT * FROM products";
+$result = $conn->query($sql);
 
 // Handle Add Product
 if (isset($_POST['add_product'])) {
@@ -8,15 +16,21 @@ if (isset($_POST['add_product'])) {
     $price = $_POST['price'];
     $description = $_POST['description'];
 
-    // Read image as binary data
-    if (isset($_FILES['image']['tmp_name']) && $_FILES['image']['tmp_name']) {
-        $image = file_get_contents($_FILES['image']['tmp_name']);
+    if (isset($_FILES['product_img']['tmp_name']) && $_FILES['product_img']['tmp_name']) {
+        $image = file_get_contents($_FILES['product_img']['tmp_name']);
     } else {
         $image = null;
     }
 
-    $stmt = $conn->prepare("INSERT INTO products (name, price, description, image) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sdss", $name, $price, $description, $image);
+    $result = $conn->query("SELECT MAX(id) AS max_id FROM products");
+    $row = $result->fetch_assoc();
+    $nextId = $row['max_id'] ? $row['max_id'] + 1 : 1;
+
+    $stmt = $conn->prepare("INSERT INTO products (id, name, price, description, product_img) VALUES (?, ?, ?, ?, ?)");
+    $null = null;
+    $stmt->bind_param("isdsb", $nextId, $name, $price, $description, $null);
+    $stmt->send_long_data(4, $image );
+
 
     if ($stmt->execute()) {
         header("Location: admin.php");
@@ -33,14 +47,16 @@ if (isset($_POST['edit_product'])) {
     $price = $_POST['price'];
     $description = $_POST['description'];
 
-    if (!empty($_FILES['image']['tmp_name'])) {
-        $image = file_get_contents($_FILES['image']['tmp_name']);
-        $stmt = $conn->prepare("UPDATE products SET name = ?, price = ?, description = ?, image = ? WHERE id = ?");
-        $stmt->bind_param("sdssi", $name, $price, $description, $image, $id);
+    if (!empty($_FILES['product_img']['tmp_name'])) {
+        $image = file_get_contents($_FILES['product_img']['tmp_name']);
+        $stmt = $conn->prepare("UPDATE products SET name = ?, price = ?, description = ?, product_img = ? WHERE id = ?");
+        $null = null;
+        $stmt->bind_param("sdsbi", $name, $price, $description, $null, $id);
+        $stmt->send_long_data(3, $image);
     } else {
         $stmt = $conn->prepare("UPDATE products SET name = ?, price = ?, description = ? WHERE id = ?");
         $stmt->bind_param("sdsi", $name, $price, $description, $id);
-    }
+    }    
 
     if ($stmt->execute()) {
         echo "<script>alert('Product updated successfully!'); window.location.href='admin.php';</script>";
@@ -58,6 +74,9 @@ if (isset($_GET['delete'])) {
     $stmt->bind_param("i", $id);
 
     if ($stmt->execute()) {
+        $stmt->close();
+        // Reset AUTO_INCREMENT to the next available number
+        $conn->query("ALTER TABLE products AUTO_INCREMENT = 1");
         header("Location: admin.php");
         exit();
     } else {
@@ -65,9 +84,13 @@ if (isset($_GET['delete'])) {
     }
 }
 
-// Fetch Products
-$sql = "SELECT * FROM products";
-$result = $conn->query($sql);
+// Handle logout
+if (isset($_POST['action']) && $_POST['action'] === 'logout') {
+    session_unset();
+    session_destroy();
+    header("Location: index.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -88,7 +111,10 @@ $result = $conn->query($sql);
     <!-- Header -->
     <header class="admin-header">
         <div class="logo">ShopAI</div>
-        <button class="logout-btn" onclick="logout()">Logout</button>
+        <form method="POST" action="admin.php" style="display:inline;">
+            <input type="hidden" name="action" value="logout">
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
     </header>
 
     <!-- Main Content -->
@@ -110,8 +136,8 @@ $result = $conn->query($sql);
                 <label for="description">Description:</label>
                 <textarea id="description" name="description" rows="4" required></textarea><br><br>
 
-                <label for="image">Product Image:</label>
-                <input type="file" id="image" name="image" accept="image/*" required><br><br>
+                <label for="product_img">Product Image:</label>
+                <input type="file" id="product_img" name="product_img" accept="product_img/*" required><br><br>
 
                 <button type="submit" name="add_product">Add Product</button>
             </form>
@@ -121,8 +147,8 @@ $result = $conn->query($sql);
         <h3>Products</h3>
         <?php while ($row = $result->fetch_assoc()): ?>
             <?php
-            $imageData = base64_encode($row['image']);
-            $imageSrc = "data:image/jpeg;base64," . $imageData;
+            $imageData = base64_encode($row['product_img']);
+            $imageSrc = "data:product_img/jpeg;base64," . $imageData;
             ?>
             <div class="product-row">
                 <img src="<?php echo $imageSrc; ?>" alt="Product Image">
@@ -168,8 +194,8 @@ $result = $conn->query($sql);
                 <label for="edit-description">Description:</label>
                 <textarea id="edit-description" name="description" rows="4"></textarea><br><br>
 
-                <label for="edit-image">Product Image:</label>
-                <input type="file" id="edit-image" name="image" accept="image/*"><br><br>
+                <label for="edit-product_img">Product Image:</label>
+                <input type="file" id="edit-product_img" name="product_img" accept="product_img/*"><br><br>
 
                 <button type="submit" name="edit_product" style>Update Product</button>
             </form>
