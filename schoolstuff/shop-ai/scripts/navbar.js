@@ -250,6 +250,32 @@ function clearCart() {
     });
 }
 
+function purchaseCart() {
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+    if (!confirm("Are you sure you want to buy all items in your cart?")) {
+        return;
+    }
+    fetch('index.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'action=buy_cart'
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            cart = [];
+            total = 0;
+            updateCartUI();
+            alert("Your order has been placed and is now pending!");
+        } else {
+            alert("Failed to place order.");
+        }
+    });
+}
+
 // Call this on page load if logged in
 if (isLoggedIn) {
     fetchCartFromServer();

@@ -21,7 +21,16 @@ include 'cart.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopAI</title>
+    <title>
+        ShopAI - 
+        <?php
+            if (isset($userData['username']) && !empty($userData['username'])) {
+                echo htmlspecialchars($userData['username']);
+            } else {
+                echo "Home";
+            }
+        ?>
+    </title>
 
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 
@@ -61,9 +70,9 @@ include 'cart.php';
                     <?php if ($isLoggedIn): ?>
                     <button popovertarget="profilePopover" id="profileButton" class="profile-icon">
                         <?php
-                            $$profileImg = 'img/nopic.jpg'; // Default image
-                            if (!empty($_SESSION['profile_img'])) {
-                                $profileImg = 'data:image/jpeg;base64,' . base64_encode($_SESSION['profile_img']);
+                            $profileImg = 'img/nopic.jpg';
+                            if (!empty($userData['profile_img'])) {
+                                $profileImg = 'data:image/jpeg;base64,' . base64_encode($userData['profile_img']);
                             }
                         ?>
                         <img src="<?php echo htmlspecialchars($profileImg); ?>" alt="Profile" class="profile-img">
@@ -184,6 +193,7 @@ include 'cart.php';
             <ul id="cartItems"></ul>
             <p id="cartTotal">Total: &#8369;0.00</p>
             <button onclick="clearCart()" class="cart-button">Clear Cart</button>
+            <button onclick="purchaseCart()" class="cart-button">Purchase</button>
         </div>
 
         <!-- Main Content -->

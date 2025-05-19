@@ -81,4 +81,29 @@ if ($action === 'clear_cart' && $isLoggedIn) {
     echo json_encode(['success' => true]);
     exit();
 }
+
+if ($action === 'buy_cart' && $isLoggedIn) {
+    $userId = $_SESSION['user_id'];
+    // Fetch all cart items for this user
+    $stmt = $conn->prepare("SELECT product_id, quantity FROM cart WHERE user_id=?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $items = [];
+    while ($row = $result->fetch_assoc()) {
+        $items[] = $row;
+    }
+    // Insert each item into pending_orders
+    foreach ($items as $item) {
+        $stmt2 = $conn->prepare("INSERT INTO pending_orders (user_id, product_id, quantity) VALUES (?, ?, ?)");
+        $stmt2->bind_param("iii", $userId, $item['product_id'], $item['quantity']);
+        $stmt2->execute();
+    }
+    // Clear the cart
+    $stmt = $conn->prepare("DELETE FROM cart WHERE user_id=?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    echo json_encode(['success' => true]);
+    exit();
+}
 ?>
