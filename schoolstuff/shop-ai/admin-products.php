@@ -6,6 +6,9 @@ session_start();
 // Database connection
 include 'connection.php';
 
+// Handle Logout
+include 'admin-logout.php';
+
 // Fetch Products
 $sql = "SELECT * FROM products";
 $result = $conn->query($sql);
@@ -83,14 +86,6 @@ if (isset($_GET['delete'])) {
         echo "Error: " . $stmt->error;
     }
 }
-
-// Handle logout
-if (isset($_POST['action']) && $_POST['action'] === 'logout') {
-    session_unset();
-    session_destroy();
-    header("Location: index.php");
-    exit();
-}
 ?>
 
 <!DOCTYPE html>
@@ -98,7 +93,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'logout') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopAI - Admin Panel</title>
+    <title>ShopAI - Admin - Products</title>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     
@@ -111,7 +106,12 @@ if (isset($_POST['action']) && $_POST['action'] === 'logout') {
     <!-- Header -->
     <header class="admin-header">
         <div class="logo">ShopAI</div>
-        <form method="POST" action="admin.php" style="display:inline;">
+        <ul class="nav-links" id="nav-links">
+            <li><a href="admin-statistics.php">Statistics</a></li>
+            <li><a href="admin-status.php">Status</a></li>
+            <li><a href="admin-products.php" class="active">Products</a></li>
+        </ul>
+        <form method="POST" action="admin-logout.php" style="display:inline;">
             <input type="hidden" name="action" value="logout">
             <button type="submit" class="logout-btn">Logout</button>
         </form>
