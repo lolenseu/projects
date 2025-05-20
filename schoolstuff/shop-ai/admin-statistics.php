@@ -20,9 +20,14 @@ $productRow = $productResult->fetch_assoc();
 $productCount = $productRow['product_count'];
 
 // Count pending orders
-$pendingResult = $conn->query("SELECT COUNT(id) AS pending_count FROM pending_orders WHERE status = 'pending'");
+$pendingResult = $conn->query("SELECT COUNT(id) AS pending_count FROM product_status WHERE status = 'pending'");
 $pendingRow = $pendingResult->fetch_assoc();
 $pendingCount = $pendingRow['pending_count'];
+
+// Count completed and delivered orders
+$completedResult = $conn->query("SELECT COUNT(id) AS completed_count FROM product_status WHERE status IN ('completed', 'delivered')");
+$completedRow = $completedResult->fetch_assoc();
+$completedCount = $completedRow['completed_count'];
 ?>
 
 <!DOCTYPE html>
@@ -36,43 +41,7 @@ $pendingCount = $pendingRow['pending_count'];
     <link href="styles/style.css" rel="stylesheet">
     <link href="styles/navbar.css" rel="stylesheet">
     <link href="styles/admin-navbar.css" rel="stylesheet">
-    <link href="styles/admin-containers.css" rel="stylesheet">
-    <style>
-        .stats-container {
-            margin: 60px auto 0 auto;
-            max-width: 600px;
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-            padding: 30px 30px;
-            text-align: center;
-        }
-
-        .stats-container h3 {
-            font-size: 2em;
-            color: #555;
-            font-weight: 600;
-            margin-bottom: 24px;
-        }
-        
-        .stat-box {
-            margin: 24px 0;
-            padding: 24px 0;
-            border-radius: 12px;
-            background:rgb(224, 224, 224);
-            font-size: 1.5em;
-            color: #555;
-            font-weight: 600;
-            box-shadow: 0 1px 6px rgba(86,156,113,0.07);
-        }
-        .stat-label {
-            display: block;
-            font-size: 1em;
-            color: #888;
-            font-weight: 400;
-            margin-top: 8px;
-        }
-    </style>
+    <link href="styles/admin-statistics.css" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
@@ -90,21 +59,27 @@ $pendingCount = $pendingRow['pending_count'];
     </header>
 
     <!-- Main Content -->
-    <div class="stats-container">
+    <div class="admin-container">
         <h3>Statistics</h3>
-        <div class="stat-box">
-            <?php echo $userCount; ?>
-            <span class="stat-label">Total Users</span>
+        <div class="stats-container">
+            <div class="stat-box">
+                <?php echo $userCount; ?>
+                <span class="stat-label">Total Users</span>
+            </div>
+            <div class="stat-box">
+                <?php echo $pendingCount; ?>
+                <span class="stat-label">Pending Orders</span>
+            </div>
+            <div class="stat-box">
+                <?php echo $completedCount; ?>
+                <span class="stat-label">Completed Orders</span>
+            </div>
+            <div class="stat-box">
+                <?php echo $productCount; ?>
+                <span class="stat-label">Total Products</span>
+            </div>
         </div>
-        <div class="stat-box">
-            <?php echo $pendingCount; ?>
-            <span class="stat-label">Pending Orders</span>
         </div>
-        <div class="stat-box">
-            <?php echo $productCount; ?>
-            <span class="stat-label">Total Products</span>
-        </div>
-    </div>
 
     <script src="scripts/admin.js"></script>
 </body>

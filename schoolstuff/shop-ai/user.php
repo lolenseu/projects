@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                 $_SESSION['profile_img'] = $user['profile_img'] ?? null;
 
                 if (strtolower($user['username']) === 'admin') {
-                    header("Location: admin.php");
+                    header("Location: admin-statistics.php");
                     exit();
                 } else {
                     echo "<script>alert('Login successful');</script>";

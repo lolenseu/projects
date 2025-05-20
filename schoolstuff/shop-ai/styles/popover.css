@@ -14,7 +14,7 @@
     animation: fadeIn 0.3s ease-in-out;
 }
 
-.user-close-btn, .profile-close-btn, .login-close-btn, .signup-close-btn, .edit-close-btn {
+.user-close-btn, .profile-close-btn, .login-close-btn, .signup-close-btn, .buyorder-close-btn, .edit-close-btn {
     position: absolute;
     top: 5px;
     right: 15px;
@@ -25,11 +25,11 @@
     color: #888;
 }
 
-.user-close-btn:hover, .login-close-btn:hover, .signup-close-btn:hover,  .profile-close-btn:hover, .cart-close-btn:hover, .edit-close-btn:hover {
+.user-close-btn:hover, .profile-close-btn:hover, .login-close-btn:hover, .signup-close-btn:hover, .buyorder-close-btn:hover, .cart-close-btn:hover, .edit-close-btn:hover {
     color: #000;
 }
 
-.user-popover-container h3, .login-popover-container h3, .signup-popover-container h3, .profile-popover-container h3, .edit-popover-container h3 {
+.user-popover-container h3, .profile-popover-container h3, .login-popover-container h3, .signup-popover-container h3, .buyorder-popover-container h3, .edit-popover-container h3 {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 15px;
@@ -126,6 +126,42 @@
     font-weight: 600;
     word-break: break-all;
     text-align: center;
+}
+
+/* BuyOrder Popover */
+.buyorder-popover-container {
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 14px;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.6);
+    width: 650px;
+    max-height: 600px;
+    z-index: 1000;
+    padding: 15px 50px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.order-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e6e6e6;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    gap: 24px; 
+    text-align: center;
+}
+
+.order-img {
+    width: 180px;
+    height: 180px;
+    margin-right: 10px;
+    border-radius: 6px;
+    object-fit: cover;
 }
 
 /* Edit Popover */

@@ -36,11 +36,12 @@ if (isset($_POST['add_product'])) {
 
 
     if ($stmt->execute()) {
-        header("Location: admin.php");
+        header("Location: admin-products.php");
         exit();
     } else {
         echo "Error: " . $stmt->error;
     }
+    $stmt->close();
 }
 
 // Handle Edit Product
@@ -62,9 +63,10 @@ if (isset($_POST['edit_product'])) {
     }    
 
     if ($stmt->execute()) {
-        echo "<script>alert('Product updated successfully!'); window.location.href='admin.php';</script>";
+        header("Location: admin-products.php");
+        exit();
     } else {
-        echo "<script>alert('Update failed.');</script>";
+        echo "Error: " . $stmt->error;
     }
     $stmt->close();
 }
@@ -80,11 +82,12 @@ if (isset($_GET['delete'])) {
         $stmt->close();
         // Reset AUTO_INCREMENT to the next available number
         $conn->query("ALTER TABLE products AUTO_INCREMENT = 1");
-        header("Location: admin.php");
+        header("Location: admin-products.php");
         exit();
     } else {
         echo "Error: " . $stmt->error;
     }
+    $stmt->close();
 }
 ?>
 
@@ -100,7 +103,7 @@ if (isset($_GET['delete'])) {
     <link href="styles/style.css" rel="stylesheet">
     <link href="styles/navbar.css" rel="stylesheet">
     <link href="styles/admin-navbar.css" rel="stylesheet">
-    <link href="styles/admin-containers.css" rel="stylesheet">
+    <link href="styles/admin-products.css" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
@@ -126,7 +129,7 @@ if (isset($_GET['delete'])) {
         <div popover id="add-product-popover" class="add-product-popover-container">
         <button popovertarget="add-product-popover" popovertargetaction="hide" class="add-product-popover-close-btn" aria-label="Close">&times;</button>
             <h3>Add Product</h3>
-            <form method="POST" enctype="multipart/form-data" class="add-product-form">
+            <form method="POST" enctype="multipart/form-data" class="add-product-form" action="admin-products.php">
                 <label for="name">Product Name:</label>
                 <input type="text" id="name" name="name" required><br><br>
 
@@ -169,7 +172,7 @@ if (isset($_GET['delete'])) {
                     >
                         Edit
                     </button>
-                    <form method="GET" action="admin.php" style="display: inline;">
+                    <form method="GET" action="admin-products.php" style="display: inline;">
                         <input type="hidden" name="delete" value="<?php echo $row['id']; ?>">
                         <button type="submit" class="delete-btn">Delete</button>
                     </form>
@@ -182,7 +185,7 @@ if (isset($_GET['delete'])) {
             <h3>Edit Product</h3>
             <button popovertarget="edit-product-popover" popovertargetaction="hide" class="edit-product-popover-close-btn" aria-label="Close">&times;</button>
             
-            <form method="POST" enctype="multipart/form-data" action="admin.php" class="edit-product-form">
+            <form method="POST" enctype="multipart/form-data" action="admin-products.php" class="edit-product-form">
                 <input type="hidden" name="product_id" id="edit-product-id">
 
                 <label for="edit-name">Product Name:</label>

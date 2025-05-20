@@ -24,36 +24,36 @@ if ($adminId) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['new_status'])) {
     $orderId = intval($_POST['order_id']);
     $newStatus = $_POST['new_status'];
-    $stmt = $conn->prepare("UPDATE pending_orders SET status = ? WHERE id = ?");
+    $stmt = $conn->prepare("UPDATE product_status SET status = ? WHERE id = ?");
     $stmt->bind_param("si", $newStatus, $orderId);
     $stmt->execute();
     $stmt->close();
-    header("Location: admin-pending.php");
+    header("Location: admin-status.php"); // <-- Change this line
     exit();
 }
 
 // Fetch pending orders with user and product info
 $pendingSql = "
     SELECT po.id, po.user_id, po.product_id, po.quantity, po.status, po.order_time,
-           u.username, u.email,
+           u.username, u.email, u.address,
            p.name AS product_name, p.price, p.product_img
-    FROM pending_orders po
+    FROM product_status po
     JOIN users u ON po.user_id = u.id
     JOIN products p ON po.product_id = p.id
-    WHERE po.status = 'pending'
+    WHERE po.status IN ('pending', 'ondelivery')
     ORDER BY po.order_time DESC
 ";
 $pendingOrders = $conn->query($pendingSql);
 
-// Fetch completed/delivered orders
+// Fetch pending/ondelivery/delivered/failed orders
 $completedSql = "
     SELECT po.id, po.user_id, po.product_id, po.quantity, po.status, po.order_time,
-           u.username, u.email,
+           u.username, u.email, u.address,
            p.name AS product_name, p.price, p.product_img
-    FROM pending_orders po
+    FROM product_status po
     JOIN users u ON po.user_id = u.id
     JOIN products p ON po.product_id = p.id
-    WHERE po.status IN ('completed', 'delivered')
+    WHERE po.status IN ('pending', 'ondelivery', 'delivered', 'failed')
     ORDER BY po.order_time DESC
 ";
 $completedOrders = $conn->query($completedSql);
@@ -70,92 +70,7 @@ $completedOrders = $conn->query($completedSql);
     <link href="styles/style.css" rel="stylesheet">
     <link href="styles/navbar.css" rel="stylesheet">
     <link href="styles/admin-navbar.css" rel="stylesheet">
-    <link href="styles/admin-containers.css" rel="stylesheet">
-    <style>
-        .admin-container {
-            margin: 40px auto 0 auto;
-            max-width: 1100px;
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-            padding: 32px 24px;
-        }
-        .admin-flex-row {
-            display: flex;
-            gap: 24px;
-        }
-        .admin-profile {
-            flex: 1;
-            background: #f5f5f5;
-            border-radius: 12px;
-            padding: 24px;
-            min-width: 180px;
-            max-width: 220px;
-            box-shadow: 0 1px 6px rgba(86,156,113,0.07);
-            height: fit-content;
-        }
-        .admin-orders {
-            flex: 2.5;
-            background:rgb(224, 224, 224);
-            border-radius: 12px;
-            padding: 0 12px;
-        }
-        .admin-status-editor {
-            flex: 1.2;
-            background: #f5f5f5;
-            border-radius: 12px;
-            padding: 24px;
-            min-width: 180px;
-            max-width: 260px;
-            box-shadow: 0 1px 6px rgba(86,156,113,0.07);
-            height: fit-content;
-        }
-        .order-row {
-            display: flex;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-            padding: 12px 0;
-            gap: 16px;
-        }
-        .order-row img {
-            width: 48px;
-            height: 48px;
-            object-fit: cover;
-            border-radius: 6px;
-        }
-        .order-info {
-            flex: 2;
-        }
-        .order-actions {
-            flex: 1;
-            text-align: right;
-        }
-        .status-badge {
-            display: inline-block;
-            padding: 2px 10px;
-            border-radius: 8px;
-            font-size: 0.95em;
-            color: #fff;
-            background: #569c71;
-        }
-        .status-badge.completed { background: #2d4739; }
-        .status-badge.delivered { background: #1e88e5; }
-        .status-badge.pending { background: #e5a11e; }
-        .admin-container h3 {
-            margin-top: 0;
-            margin-bottom: 18px;
-            color: #555;
-            font-size: 1.5em;
-        }
-        p {
-            margin: 0;
-            color: #555;
-            font-size: 1em;
-        }
-        .admin-container + .admin-container {
-            margin-top: 36px;
-        }
-    </style>
+    <link href="styles/admin-status.css" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
@@ -172,12 +87,12 @@ $completedOrders = $conn->query($completedSql);
         </form>
     </header>
 
-    <!-- First Container: Pending Orders -->
+    <!-- Main Content -->
     <div class="admin-container">
-        <h3>Pending</h3>
-        <div class="admin-flex-row">
-            <div class="admin-orders">
-                <h4>Pending Orders</h4>
+        <!-- First Container: Pending Orders -->
+        <div class="first-container">
+            <h3>Pending Option</h3>
+            <div class="orders">
                 <?php if ($pendingOrders->num_rows > 0): ?>
                     <?php while ($order = $pendingOrders->fetch_assoc()): ?>
                         <div class="order-row">
@@ -186,6 +101,7 @@ $completedOrders = $conn->query($completedSql);
                                 <div><strong><?php echo htmlspecialchars($order['product_name']); ?></strong> (x<?php echo $order['quantity']; ?>)</div>
                                 <div>₱<?php echo number_format($order['price'], 2); ?></div>
                                 <div>User: <?php echo htmlspecialchars($order['username']); ?> (<?php echo htmlspecialchars($order['email']); ?>)</div>
+                                <div>Address: <?php echo htmlspecialchars($order['address']); ?></div>
                                 <div>Order Time: <?php echo $order['order_time']; ?></div>
                             </div>
                             <div class="order-actions">
@@ -193,8 +109,9 @@ $completedOrders = $conn->query($completedSql);
                                     <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
                                     <select name="new_status">
                                         <option value="pending" <?php if($order['status']=='pending') echo 'selected'; ?>>Pending</option>
-                                        <option value="completed">Completed</option>
+                                        <option value="ondelivery" <?php if($order['status']=='ondelivery') echo 'selected'; ?>>OnDelivery</option>
                                         <option value="delivered">Delivered</option>
+                                        <option value="failed">Failed</option>
                                     </select>
                                     <button type="submit" class="edit-btn">Update</button>
                                 </form>
@@ -206,29 +123,32 @@ $completedOrders = $conn->query($completedSql);
                 <?php endif; ?>
             </div>
         </div>
-    </div>
 
-    <!-- Second Container: Completed/Delivered Orders Log -->
-    <div class="admin-container">
-        <h3>Completed & Delivered Orders</h3>
-        <?php if ($completedOrders->num_rows > 0): ?>
-            <?php while ($order = $completedOrders->fetch_assoc()): ?>
-                <div class="order-row">
-                    <img src="data:image/jpeg;base64,<?php echo base64_encode($order['product_img']); ?>" alt="Product">
-                    <div class="order-info">
-                        <div><strong><?php echo htmlspecialchars($order['product_name']); ?></strong> (x<?php echo $order['quantity']; ?>)</div>
-                        <div>₱<?php echo number_format($order['price'], 2); ?></div>
-                        <div>User: <?php echo htmlspecialchars($order['username']); ?> (<?php echo htmlspecialchars($order['email']); ?>)</div>
-                        <div>Order Time: <?php echo $order['order_time']; ?></div>
+        <!-- Second Container: Completed/Delivered Orders Log -->
+        <div class="second-container">
+            <h3>Status</h3>
+            <?php if ($completedOrders->num_rows > 0): ?>
+                <?php while ($order = $completedOrders->fetch_assoc()): ?>
+                    <div class="order-row">
+                        <img src="data:image/jpeg;base64,<?php echo base64_encode($order['product_img']); ?>" alt="Product">
+                        <div class="order-info">
+                            <div><strong><?php echo htmlspecialchars($order['product_name']); ?></strong> (x<?php echo $order['quantity']; ?>)</div>
+                            <div>₱<?php echo number_format($order['price'], 2); ?></div>
+                            <div>User: <?php echo htmlspecialchars($order['username']); ?> (<?php echo htmlspecialchars($order['email']); ?>)</div>
+                            <div>Address: <?php echo htmlspecialchars($order['address']); ?></div>
+                            <div>Order Time: <?php echo $order['order_time']; ?></div>
+                        </div>
+                        <div class="order-actions">
+                            <span class="status-badge <?php echo $order['status']; ?>">
+                                <?php echo ucfirst($order['status']); ?>
+                            </span>
+                        </div>
                     </div>
-                    <div class="order-actions">
-                        <span class="status-badge <?php echo $order['status']; ?>"><?php echo ucfirst($order['status']); ?></span>
-                    </div>
-                </div>
-            <?php endwhile; ?>
-        <?php else: ?>
-            <p>No completed or delivered orders.</p>
-        <?php endif; ?>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <p>No completed or delivered orders.</p>
+            <?php endif; ?>
+        </div>
     </div>
 
     <script src="scripts/admin.js"></script>

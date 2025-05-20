@@ -3,20 +3,28 @@
     padding: 20px 15%;
 }
 
+.admin-container h3 {
+    margin-top: 0;
+    margin-bottom: 18px;
+    color: #fff;
+    font-size: 1.5em;
+}
+
 /* Add Product */
 .admin-container .add-product-btn {
-    background-color: #2ecc71;
+    background-color: rgb(86, 156, 113);
     color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 16px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 1em;
     margin-bottom: 20px;
+    transition: background 0.2s;
 }
 
 .admin-container .add-product-btn:hover {
-    background-color: #27ae60;
+    background-color: rgb(52, 114, 76);
 }
 
 /* Add Product Popover */
@@ -136,11 +144,13 @@
     padding: 12px 18px;
     border-radius: 16px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 1em;
+    transition: background 0.2s;
 }
 
 .product-row .product-actions button.delete-btn {
     background-color: #e74c3c;
+    font-size: 1em;
 }
 
 .product-row .product-actions button:hover {

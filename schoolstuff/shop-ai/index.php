@@ -150,13 +150,61 @@ include 'cart.php';
                         <p><strong>Address:</strong></p>
                         <p><?php echo htmlspecialchars($userData['address'] ?? ''); ?></p>
                     </div>
-                    <button popovertarget="editPopover" class="profile-btn" style="margin-top:5px;">Edit Profile</button>
-                    <form method="POST" action="index.php" style="margin-top:10px;">
-                        <input type="hidden" name="action" value="logout">
-                        <button type="submit" class="profile-btn">Logout</button>
-                    </form>
+                    <div>
+                        <button popovertarget="buyOrdersPopover" class="profile-btn">My Orders</button>
+                        <button popovertarget="editPopover" class="profile-btn">Edit Profile</button>
+                        <form method="POST" action="index.php">
+                            <input type="hidden" name="action" value="logout">
+                            <button type="submit" class="profile-btn">Logout</button>
+                        </form>
+                    </div>
                 <?php endif; ?>
             </div>
+        
+        <div popover id="buyOrdersPopover" class="buyorder-popover-container">
+            <button popovertarget="buyOrdersPopover" popovertargetaction="hide" class="buyorder-close-btn" aria-label="Close">&times;</button>
+            <h3>My Orders</h3>
+            <div class="orders-list">
+                <?php
+                if ($isLoggedIn) {
+                    // Fetch orders for this user
+                    $userId = $_SESSION['user_id'];
+                    $ordersSql = "
+                        SELECT ps.*, p.name AS product_name, p.price, p.product_img
+                        FROM product_status ps
+                        JOIN products p ON ps.product_id = p.id
+                        WHERE ps.user_id = ?
+                        ORDER BY ps.order_time DESC
+                    ";
+                    $stmt = $conn->prepare($ordersSql);
+                    $stmt->bind_param("i", $userId);
+                    $stmt->execute();
+                    $ordersResult = $stmt->get_result();
+                    if ($ordersResult->num_rows > 0) {
+                        while ($order = $ordersResult->fetch_assoc()) {
+                            $imgSrc = 'img/nopic.jpg';
+                            if (!empty($order['product_img'])) {
+                                $imgSrc = 'data:image/jpeg;base64,' . base64_encode($order['product_img']);
+                            }
+                            echo '<div class="order-row">';
+                            echo '<img src="'.htmlspecialchars($imgSrc).'" alt="Product" class="order-img">';
+                            echo '<div style="flex:1;">';
+                            echo '<div style="font-weight:bold;">'.htmlspecialchars($order['product_name']).'</div>';
+                            echo '<div style="color:#569c71;">₱'.number_format($order['price'],2).'</div>';
+                            echo '<div style="font-size:0.95em;">Status: <span class="status-badge '.htmlspecialchars($order['status']).'">'.ucfirst($order['status']).'</span></div>';
+                            echo '</div>';
+                            echo '</div>';
+                        }
+                    } else {
+                        echo '<p style="text-align:center;">No orders found.</p>';
+                    }
+                    $stmt->close();
+                } else {
+                    echo '<p style="text-align:center;">Please log in to view your orders.</p>';
+                }
+                ?>
+            </div>
+        </div>
 
         <div popover id="editPopover" class="edit-popover-container">
             <div class="edit-modal-content">

@@ -1,4 +1,7 @@
 <?php
+// Start the session
+session_start();
+
 // Handle logout
 if (isset($_POST['action']) && $_POST['action'] === 'logout') {
     session_unset();
