@@ -1,24 +1,50 @@
-import os
+import time
 import struct
+from pynput.keyboard import Controller, Key
 
-key_names = {
-    1: "Page Up",
-    2: "Left",
-    3: "Down",
-    4: "Right"
+keyboard = Controller()
+
+key_map = {
+    1: Key.up,
+    2: Key.left,
+    3: Key.down,
+    4: Key.right,
 }
 
-path = "arrow_hold_log.bin"  # Change this to your actual file name
+entries = []
 
-if not os.path.exists(path):
-    print(f"[ERROR] File not found: {path}")
-    exit(1)
-
-with open(path, "rb") as f:
-    print("Reading key log...\n")
+with open("arrow.bin", "rb") as f:
     while True:
-        data = f.read(9)  # 1 byte + 4 byte float + 4 byte float
-        if not data or len(data) < 9:
+        chunk = f.read(8)
+        if not chunk or len(chunk) < 8:
             break
-        code, start, duration = struct.unpack("Iff", data)
-        print(f"{key_names.get(code, 'Unknown')} → Start: {start:.2f}s | Hold: {duration:.2f}s")
+        t, k1, k2, k3, k4 = struct.unpack("<fBBBB", chunk)
+        keys = [key_map[k] for k in (k1, k2, k3, k4) if k in key_map]
+        entries.append((t, keys))
+
+
+entries.sort(key=lambda e: e[0])
+
+print("Replaying multi-key log...\n")
+
+start = time.time()
+for i, (press_time, keys) in enumerate(entries):
+    while time.time() - start < press_time:
+        time.sleep(0.001)
+
+    key_names = [str(k).replace("Key.", "") for k in keys]
+    print(f"{press_time:.3f}s ─ Pressing: {', '.join(key_names)}")
+
+    for k in keys:
+        keyboard.press(k)
+
+    if i < len(entries) - 1:
+        delay = entries[i + 1][0] - press_time
+        time.sleep(delay)
+    else:
+        time.sleep(0.2)
+
+    for k in keys:
+        keyboard.release(k)
+
+print("\nReplay done.")
