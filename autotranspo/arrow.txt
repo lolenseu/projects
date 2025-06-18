@@ -1,0 +1,51 @@
+3.674s ─ Down
+4.209s ─ Down, Right
+5.904s ─ Down
+7.983s ─ Down, Right
+13.645s ─ Right
+15.203s ─ Down, Right
+16.888s ─ Right
+18.605s ─ Up, Right
+19.320s ─ Right
+21.857s ─ Down, Right
+22.979s ─ Right
+24.619s ─ Down, Right
+27.684s ─ Right
+29.657s ─ Down, Right
+37.518s ─ Down
+39.953s ─ Down, Right
+42.438s ─ Down
+44.875s ─ Down, Right
+46.248s ─ Down
+48.405s ─ Down, Right
+53.023s ─ Down
+53.853s ─ Down, Right
+61.187s ─ Right
+62.799s ─ Down, Right
+67.533s ─ Right
+69.065s ─ Down, Right
+70.831s ─ Right
+72.850s ─ Down, Right
+74.433s ─ Right
+76.229s ─ Up, Right
+77.286s ─ Right
+79.287s ─ Up, Right
+80.456s ─ Right
+82.379s ─ Down, Right
+83.553s ─ Right
+85.388s ─ Down, Right
+89.942s ─ Right
+91.802s ─ Down, Right
+99.741s ─ Down
+101.237s ─ Down, Right
+102.011s ─ Down
+103.029s ─ Down, Right
+104.939s ─ Down
+107.538s ─ Left, Down
+108.778s ─ Down
+111.061s ─ Down, Right
+116.751s ─ Down
+119.481s ─ Left, Down
+121.789s ─ Down
+124.060s ─ Down, Right
+126.873s ─ Right
