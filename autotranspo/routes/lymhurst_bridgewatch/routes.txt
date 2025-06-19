@@ -1,0 +1,8 @@
+{
+	"lh_bw_1.bin":"GOOD",
+	"lh_bw_2.bin":"GOOD",
+	"lh_bw_3.bin":"GOOD",
+	"lh_bw_4.bin":"GOOD",
+	"lh_bw_5.bin":"GOOD",
+	"lh_bw_6.bin":"GOOD"
+}

@@ -1,0 +1,8 @@
+{
+	"ml_bw_1.bin":"GOOD",
+	"ml_bw_2.bin":"GOOD",
+	"ml_bw_3.bin":"GOOD",
+	"ml_bw_4.bin":"GOOD",
+	"ml_bw_5.bin":"GOOD",
+	"ml_bw_6.bin":"GOOD"
+}

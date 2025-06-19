@@ -1,51 +1,53 @@
-3.674s ─ Down
-4.209s ─ Down, Right
-5.904s ─ Down
-7.983s ─ Down, Right
-13.645s ─ Right
-15.203s ─ Down, Right
-16.888s ─ Right
-18.605s ─ Up, Right
-19.320s ─ Right
-21.857s ─ Down, Right
-22.979s ─ Right
-24.619s ─ Down, Right
-27.684s ─ Right
-29.657s ─ Down, Right
-37.518s ─ Down
-39.953s ─ Down, Right
-42.438s ─ Down
-44.875s ─ Down, Right
-46.248s ─ Down
-48.405s ─ Down, Right
-53.023s ─ Down
-53.853s ─ Down, Right
-61.187s ─ Right
-62.799s ─ Down, Right
-67.533s ─ Right
-69.065s ─ Down, Right
-70.831s ─ Right
-72.850s ─ Down, Right
-74.433s ─ Right
-76.229s ─ Up, Right
-77.286s ─ Right
-79.287s ─ Up, Right
-80.456s ─ Right
-82.379s ─ Down, Right
-83.553s ─ Right
-85.388s ─ Down, Right
-89.942s ─ Right
-91.802s ─ Down, Right
-99.741s ─ Down
-101.237s ─ Down, Right
-102.011s ─ Down
-103.029s ─ Down, Right
-104.939s ─ Down
-107.538s ─ Left, Down
-108.778s ─ Down
-111.061s ─ Down, Right
-116.751s ─ Down
-119.481s ─ Left, Down
-121.789s ─ Down
-124.060s ─ Down, Right
-126.873s ─ Right
+2.620s ─ Down
+2.966s ─ Down, Right
+9.417s ─ Down
+9.871s ─ Down, Right
+11.385s ─ Down
+13.639s ─ Down, Right
+15.862s ─ Down
+17.951s ─ Down, Right
+21.589s ─ Right
+24.579s ─ Up, Right
+27.537s ─ Right
+29.805s ─ Up, Right
+32.512s ─ Right
+39.596s ─ Down, Right
+46.069s ─ Right
+47.656s ─ Down, Right
+50.355s ─ Right
+53.457s ─ Up, Right
+54.313s ─ Right
+55.580s ─ Down, Right
+57.294s ─ Right
+59.551s ─ Up, Right
+60.536s ─ Right
+62.436s ─ Down, Right
+74.361s ─ Right
+75.475s ─ Down, Right
+78.069s ─ Right
+83.192s ─ Down, Right
+85.256s ─ Right
+87.260s ─ Down, Right
+99.319s ─ Down
+100.131s ─ Down, Right
+101.900s ─ Down
+103.944s ─ Down, Right
+105.491s ─ Down
+106.919s ─ Left, Down
+110.222s ─ Down
+112.362s ─ Down, Right
+113.573s ─ Down
+115.426s ─ Left, Down
+121.466s ─ Left
+124.037s ─ Left, Down
+125.755s ─ Left
+127.950s ─ Left, Down
+132.138s ─ Down
+133.473s ─ Left, Down
+138.129s ─ Down
+145.217s ─ Left, Down
+148.651s ─ Down
+151.074s ─ Down, Right
+156.460s ─ Right
+157.490s ─ Down, Right
+162.750s ─ Right
