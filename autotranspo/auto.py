@@ -13,7 +13,7 @@ key_map = {
 
 entries = []
 
-with open("routes/bridgewatch_martlock/bw_ml_2.bin", "rb") as f:
+with open(f"routes/thetford_fortsterling/tf_fs_{6}.bin", "rb") as f:
     while True:
         chunk = f.read(8)
         if not chunk or len(chunk) < 8:

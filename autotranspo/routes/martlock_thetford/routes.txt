@@ -1,0 +1,8 @@
+{
+	"ml_tf_1.bin":"GOOD",
+	"ml_tf_2.bin":"GOOD",
+	"ml_tf_3.bin":"GOOD",
+	"ml_tf_4.bin":"GOOD",
+	"ml_tf_5.bin":"GOOD",
+	"ml_tf_6.bin":"GOOD"
+}

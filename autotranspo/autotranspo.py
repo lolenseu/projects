@@ -20,7 +20,7 @@ while True:
 
     entries = []
 
-    with open(f"routes/martlock_bridgewatch/ml_bw_{count}.bin", "rb") as f:
+    with open(f"routes/thetford_fortsterling/tf_fs_{count}.bin", "rb") as f:
         while True:
             chunk = f.read(8)
             if not chunk or len(chunk) < 8:

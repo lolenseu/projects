@@ -1,53 +1,55 @@
-2.620s ─ Down
-2.966s ─ Down, Right
-9.417s ─ Down
-9.871s ─ Down, Right
-11.385s ─ Down
-13.639s ─ Down, Right
-15.862s ─ Down
-17.951s ─ Down, Right
-21.589s ─ Right
-24.579s ─ Up, Right
-27.537s ─ Right
-29.805s ─ Up, Right
-32.512s ─ Right
-39.596s ─ Down, Right
-46.069s ─ Right
-47.656s ─ Down, Right
-50.355s ─ Right
-53.457s ─ Up, Right
-54.313s ─ Right
-55.580s ─ Down, Right
-57.294s ─ Right
-59.551s ─ Up, Right
-60.536s ─ Right
-62.436s ─ Down, Right
-74.361s ─ Right
-75.475s ─ Down, Right
-78.069s ─ Right
-83.192s ─ Down, Right
-85.256s ─ Right
-87.260s ─ Down, Right
-99.319s ─ Down
-100.131s ─ Down, Right
-101.900s ─ Down
-103.944s ─ Down, Right
-105.491s ─ Down
-106.919s ─ Left, Down
-110.222s ─ Down
-112.362s ─ Down, Right
-113.573s ─ Down
-115.426s ─ Left, Down
-121.466s ─ Left
-124.037s ─ Left, Down
-125.755s ─ Left
-127.950s ─ Left, Down
-132.138s ─ Down
-133.473s ─ Left, Down
-138.129s ─ Down
-145.217s ─ Left, Down
-148.651s ─ Down
-151.074s ─ Down, Right
-156.460s ─ Right
-157.490s ─ Down, Right
-162.750s ─ Right
+2.445s ─ Right
+2.897s ─ Up, Right
+5.697s ─ Right
+8.028s ─ Up, Right
+10.203s ─ Right
+12.689s ─ Up, Right
+13.863s ─ Right
+15.832s ─ Up, Right
+17.038s ─ Right
+19.141s ─ Up, Right
+21.419s ─ Right
+23.457s ─ Up, Right
+26.327s ─ Right
+26.968s ─ Up, Right
+36.121s ─ Right
+38.387s ─ Down, Right
+40.128s ─ Right
+41.968s ─ Down, Right
+47.883s ─ Right
+49.338s ─ Down, Right
+50.827s ─ Right
+52.354s ─ Down, Right
+53.757s ─ Right
+55.552s ─ Down, Right
+57.192s ─ Right
+59.164s ─ Down, Right
+62.246s ─ Right
+63.672s ─ Down, Right
+69.728s ─ Right
+71.904s ─ Down, Right
+73.327s ─ Right
+75.576s ─ Up, Right
+76.592s ─ Right
+78.566s ─ Up, Right
+79.732s ─ Right
+81.914s ─ Up, Right
+92.765s ─ Up
+98.289s ─ Up, Left
+99.280s ─ Up
+101.133s ─ Up, Left
+102.233s ─ Up
+105.411s ─ Up, Right
+108.018s ─ Up
+110.389s ─ Up, Right
+113.735s ─ Up
+115.633s ─ Up, Right
+121.531s ─ Right
+124.229s ─ Up, Right
+130.155s ─ Up
+132.988s ─ Up, Right
+136.821s ─ Right
+139.149s ─ Up, Right
+141.330s ─ Right
+142.958s ─ Up, Right
+146.723s ─ Right

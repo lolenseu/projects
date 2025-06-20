@@ -1,8 +1,8 @@
 {
-	"bw_ml_1.bin":"GOOD",
-	"bw_ml_2.bin":"GOOD",
-	"bw_ml_3.bin":"GOOD",
-	"bw_ml_4.bin":"GOOD",
-	"bw_ml_5.bin":"GOOD",
-	"bw_ml_6.bin":"GOOD"
+	"tf_fs_1.bin":"GOOD",
+	"tf_fs_2.bin":"GOOD",
+	"tf_fs_3.bin":"GOOD",
+	"tf_fs_4.bin":"GOOD",
+	"tf_fs_5.bin":"GOOD",
+	"tf_fs_6.bin":"GOOD"
 }

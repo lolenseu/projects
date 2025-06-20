@@ -1,0 +1,8 @@
+{
+	"fs_tf_1.bin":"GOOD",
+	"fs_tf_2.bin":"GOOD",
+	"fs_tf_3.bin":"GOOD",
+	"fs_tf_4.bin":"GOOD",
+	"fs_tf_5.bin":"BAD",
+	"fs_tf_6.bin":"GOOD"
+}

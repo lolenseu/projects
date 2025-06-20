@@ -1,8 +1,8 @@
 {
-	"tf_ml_1.bin":"BAD",
+	"tf_ml_1.bin":"GOOD",
 	"tf_ml_2.bin":"GOOD",
-	"tf_ml_3.bin":"BAD",
+	"tf_ml_3.bin":"GOOD",
 	"tf_ml_4.bin":"GOOD",
-	"tf_ml_5.bin":"BAD",
+	"tf_ml_5.bin":"GOOD",
 	"tf_ml_6.bin":"GOOD"
 }
