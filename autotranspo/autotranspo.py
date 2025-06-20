@@ -56,5 +56,5 @@ while True:
     print(f"\nReplay of {count} done.")
     
     count += 1
-    time.sleep(12)
+    time.sleep(14)
 

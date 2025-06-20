@@ -1,0 +1,8 @@
+{
+	"fs_lh_1.bin":"GOOD",
+	"fs_lh_2.bin":"GOOD",
+	"fs_lh_3.bin":"GOOD",
+	"fs_lh_4.bin":"GOOD",
+	"fs_lh_5.bin":"GOOD",
+	"fs_lh_6.bin":"GOOD"
+}
