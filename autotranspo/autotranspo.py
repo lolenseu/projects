@@ -1,6 +1,7 @@
 import time
 import struct
 from pynput.keyboard import Controller, Key
+from pynput import keyboard as pynput_keyboard
 
 keyboard = Controller()
 
@@ -22,7 +23,18 @@ key_map = {
     4: Key.right,
 }
 
+ctrl_pause = False
+
+def on_press(key):
+    global ctrl_pause
+    if key == Key.ctrl_l:
+        ctrl_pause = not ctrl_pause
+
+listener = pynput_keyboard.Listener(on_press=on_press)
+listener.start()
+
 count = 1
+
 time.sleep(5)
 
 while True:
@@ -42,12 +54,18 @@ while True:
 
     entries.sort(key=lambda e: e[0])
 
-    print(f"Replaying file {count}...\n")
+    print(f"Playing Way {count}...\n")
 
     start = time.time()
     for i, (press_time, keys) in enumerate(entries):
         while time.time() - start < press_time:
+            if ctrl_pause:
+                break
             time.sleep(0.001)
+            
+        if ctrl_pause:
+            print("Paused and skipping to next Way. Press Control again to continue...")
+            break
 
         key_names = [str(k).replace("Key.", "") for k in keys]
         print(f"{press_time:.3f}s ─ Pressing: {', '.join(key_names)}")
@@ -64,8 +82,12 @@ while True:
         for k in keys:
             keyboard.release(k)
 
-    print(f"\nReplay of {count} done.")
+    print(f"\nWay {count} done.")
+    
+    if ctrl_pause:
+        while ctrl_pause:
+            time.sleep(0.1)
+        print("Continuing to next Way...")
     
     count += 1
     time.sleep(14)
-
