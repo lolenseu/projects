@@ -4,6 +4,17 @@ from pynput.keyboard import Controller, Key
 
 keyboard = Controller()
 
+route0 = "bridgewatch_lymhurst/bw_lh"
+route1 = "bridgewatch_martlock/bw_ml"
+route2 = "fortsterling_lymhurst/fs_lh"
+route3 = "fortsterling_thetford/fs_tf"
+route4 = "lymhurst_bridgewatch/lh_bw"
+route5 = "lymhurst_fortsterling/lh_fs"
+route6 = "martlock_bridgewatch/ml_bw"
+route7 = "martlock_thetford/ml_tf"
+route8 = "thetford_fortsterling/tf_fs"
+route9 = "thetford_martlock/tf_ml"
+
 key_map = {
     1: Key.up,
     2: Key.left,
@@ -13,7 +24,7 @@ key_map = {
 
 entries = []
 
-with open(f"routes/lymhurst_bridgewatch/lh_bw_{6}.bin", "rb") as f:
+with open(f"routes/{route3}_{6}.bin", "rb") as f:
     while True:
         chunk = f.read(8)
         if not chunk or len(chunk) < 8:
