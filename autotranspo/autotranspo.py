@@ -5,16 +5,18 @@ from pynput import keyboard as pynput_keyboard
 
 keyboard = Controller()
 
-route0 = "bridgewatch_lymhurst/bw_lh"
-route1 = "bridgewatch_martlock/bw_ml"
-route2 = "fortsterling_lymhurst/fs_lh"
-route3 = "fortsterling_thetford/fs_tf"
-route4 = "lymhurst_bridgewatch/lh_bw"
-route5 = "lymhurst_fortsterling/lh_fs"
-route6 = "martlock_bridgewatch/ml_bw"
-route7 = "martlock_thetford/ml_tf"
-route8 = "thetford_fortsterling/tf_fs"
-route9 = "thetford_martlock/tf_ml"
+routes = [
+    ("Bridgewatch to Lymhurst", "bridgewatch_lymhurst/bw_lh"),
+    ("Bridgewatch to Martlock", "bridgewatch_martlock/bw_ml"),
+    ("Fort Sterling to Lymhurst", "fortsterling_lymhurst/fs_lh"),
+    ("Fort Sterling to Thetford", "fortsterling_thetford/fs_tf"),
+    ("Lymhurst to Bridgewatch", "lymhurst_bridgewatch/lh_bw"),
+    ("Lymhurst to Fort Sterling", "lymhurst_fortsterling/lh_fs"),
+    ("Martlock to Bridgewatch", "martlock_bridgewatch/ml_bw"),
+    ("Martlock to Thetford", "martlock_thetford/ml_tf"),
+    ("Thetford to Fort Sterling", "thetford_fortsterling/tf_fs"),
+    ("Thetford to Martlock", "thetford_martlock/tf_ml"),
+]
 
 key_map = {
     1: Key.up,
@@ -33,9 +35,32 @@ def on_press(key):
 listener = pynput_keyboard.Listener(on_press=on_press)
 listener.start()
 
-count = 1
+# Print route menu
+print("Select a route:")
+for idx, (desc, _) in enumerate(routes):
+    print(f"{idx} = {desc}")
 
-time.sleep(5)
+route_input = input("\nEnter route number (0-9): ")
+try:
+    route_idx = int(route_input)
+    if not (0 <= route_idx < len(routes)):
+        raise ValueError
+except ValueError:
+    print("Invalid route. Exiting.")
+    exit(1)
+
+route_name, route_path = routes[route_idx]
+
+way_input = input("\nEnter Way Point to start from (1-6, press Enter for 1): ")
+try:
+    count = int(way_input) if way_input.strip() else 1
+    if not (1 <= count <= 6):
+        raise ValueError
+except ValueError:
+    print("Invalid Way Point. Exiting.")
+    exit(1)
+
+time.sleep(3)
 
 while True:
     if count >= 7:
@@ -43,7 +68,7 @@ while True:
 
     entries = []
 
-    with open(f"routes/{route0}_{count}.bin", "rb") as f:
+    with open(f"routes/{route_path}_{count}.bin", "rb") as f:
         while True:
             chunk = f.read(8)
             if not chunk or len(chunk) < 8:
@@ -54,7 +79,7 @@ while True:
 
     entries.sort(key=lambda e: e[0])
 
-    print(f"Playing Way {count}...\n")
+    print(f"\nPlaying Way {count}...")
 
     start = time.time()
     for i, (press_time, keys) in enumerate(entries):
@@ -64,11 +89,11 @@ while True:
             time.sleep(0.001)
             
         if ctrl_pause:
-            print("Paused and skipping to next Way. Press Control again to continue...")
+            print("\nPaused and skipping to next Way. Press Control again to continue...")
             break
 
         key_names = [str(k).replace("Key.", "") for k in keys]
-        print(f"{press_time:.3f}s ─ Pressing: {', '.join(key_names)}")
+        #print(f"{press_time:.3f}s ─ Pressing: {', '.join(key_names)}") ## debug
 
         for k in keys:
             keyboard.press(k)
@@ -87,7 +112,7 @@ while True:
     if ctrl_pause:
         while ctrl_pause:
             time.sleep(0.1)
-        print("Continuing to next Way...")
+        print("\nContinuing to next Way...")
     
     count += 1
-    time.sleep(14)
+    time.sleep(15)
