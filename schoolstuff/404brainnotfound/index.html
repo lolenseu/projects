@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>404 — No Brain Not Found</title>
+  <style>
+    :root{--bg:#0f1724;--card:#111827;--accent:#7c3aed;--muted:#9aa4b2}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,Segoe UI,Roboto,system-ui,-apple-system,"Helvetica Neue",Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.12), transparent),
+                  linear-gradient(180deg, #0f2757 0%, #091833 50%, #071226 100%);
+      color: #e6eef8;
+      display:flex;align-items:center;justify-content:center;padding:2rem;
+    }
+    .card{
+      width:min(650px,100%);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:16px;padding:36px;border:1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      text-align:center;
+    }
+    h1{margin:0;font-size:40px;line-height:1.2;color:#fff;letter-spacing:-1px}
+    p.lead{margin:50px 0 50px;color:var(--muted)}
+    .emoji{font-size:88px;display:block;text-align:center;margin-bottom:16px}
+    .btn{
+      display:inline-flex;align-items:center;gap:12px;padding:16px 16px;border-radius:20px;text-decoration:none;
+      background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:2px solid rgba(255, 255, 255, 0.050);color:inherit;font-weight:600;transition:all .18s ease;
+    }
+    .btn:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(2,6,23,0.6)}
+    .btn .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);flex-shrink:0}
+    .links{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:24px}
+    .muted-small{color:var(--muted);font-size:13px;text-align:center;margin-top:24px}
+    @media (max-width:840px){
+      .emoji{font-size:68px}
+    }
+  </style>
+</head>
+<body>
+  <main class="card" role="main">
+    <div class="emoji" aria-hidden="true">🧠❌</div>
+    <h1>404 — Brain Not Found</h1>
+    <p class="lead">Looks like somebody left their brain at home. Nothing to see here —<br> but you can check out these portfolio links:</p>
+
+    <div class="links">
+      <a class="btn" href="https://github.com/profile1" target="_blank"><span class="dot"></span>Cortez</a>
+      <a class="btn" href="https://github.com/profile2" target="_blank"><span class="dot"></span>Almoite</a>
+      <a class="btn" href="https://github.com/profile3" target="_blank"><span class="dot"></span>Madrid</a>
+      <a class="btn" href="https://github.com/profile4" target="_blank"><span class="dot"></span>Acosta</a>
+    </div>
+
+    <div class="muted-small">If you think this is a mistake, try clearing your cache or head back to the beninging.</div>
+  </main>
+</body>
+</html>
