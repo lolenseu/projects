@@ -25,9 +25,9 @@ if __name__ == "__main__":
     while True:
         if spamming:
             Controller().press('q')
-            time.sleep(random.uniform(.1, .2))
+            time.sleep(random.uniform(.08, .1))
             Controller().release('q')
-            time.sleep(random.uniform(.1, .2))
+            time.sleep(random.uniform(.08, .1))
         else:
             time.sleep(.1)
             
