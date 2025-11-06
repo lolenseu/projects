@@ -117,8 +117,16 @@
         @endforeach
       </tbody>
     </table>
+
+    @if($todos->isEmpty())
+    <div class="no-tasks">
+      <p>No Tasks Found</p>
+    </div>
+    @endif
   </div>
 </div>
+
+<button id="backToTop" class="back-to-top">Back to Top</button>
 
 <script>
   // Add Modal
@@ -191,5 +199,18 @@
     if (e.target == editModal) editModal.style.display = 'none';
     if (e.target == deleteModal) deleteModal.style.display = 'none';
   };
+
+  // Back to Top Button Logic
+  const backToTop = document.getElementById("backToTop");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 200) {
+      backToTop.style.display = "block";
+    } else {
+      backToTop.style.display = "none";
+    }
+  });
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 </script>
 @endsection
