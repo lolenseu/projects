@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>@yield('title', 'To-Do App')</title>
+  <title>@yield('title', 'ToDo App')</title>
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -13,7 +13,7 @@
 <body>
   <nav class="navbar">
     <div class="left-section">
-      <div class="logo">To-Do App</div>
+      <div class="logo">ToDo App</div>
       @auth
         <div class="username">{{ Auth::user()->name }}</div>
       @endauth

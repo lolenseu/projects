@@ -1,11 +1,19 @@
 @extends('layout')
-@section('title', 'To-Do List')
+@section('title', 'ToDo List')
 
 @section('content')
 <div class="todo-page">
   <div class="todo-header">
-    <h2>To-Do List</h2>
-    <button class="add-btn" id="openModalBtn">Add New</button>
+    <h2>ToDo List</h2>
+    <div class="header-actions">
+      <span class="filter-label">Filter:</span>
+      <select id="statusFilter" class="filter-select">
+        <option value="all">All Tasks</option>
+        <option value="Pending">Pending</option>
+        <option value="Completed">Completed</option>
+      </select>
+      <button class="add-btn" id="openModalBtn">Add New</button>
+    </div>
   </div>
 
   <!-- Add Modal -->
@@ -81,7 +89,7 @@
       <tbody>
         @foreach($todos as $todo)
         <tr>
-          <td>{{ $todo->status }}</td>
+          <td class="status-cell {{ strtolower($todo->status) }}">{{ $todo->status }}</td>
           <td>{{ $todo->task }}</td>
           <td class="description-cell" title="{{ $todo->description }}">
             {{ $todo->description }}
@@ -129,6 +137,25 @@
 <button id="backToTop" class="back-to-top">Back to Top</button>
 
 <script>
+  // Filter Tasks by Status
+  const statusFilter = document.getElementById('statusFilter');
+  const tableRows = document.querySelectorAll('tbody tr');
+
+  statusFilter.addEventListener('change', () => {
+    const selected = statusFilter.value;
+    tableRows.forEach(row => {
+      const statusCell = row.querySelector('td:first-child');
+      if (!statusCell) return;
+
+      const status = statusCell.textContent.trim();
+      if (selected === 'all' || status === selected) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+
   // Add Modal
   const addModal = document.getElementById('addModal');
   const openBtn = document.getElementById('openModalBtn');
