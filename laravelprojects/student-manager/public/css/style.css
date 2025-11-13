@@ -264,6 +264,20 @@ main {
   font-weight: 600;
 }
 
+.print-cv-link {
+  color: #cccccc;
+  text-decoration: none;
+  padding: 0 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  line-height: 1;
+}
+
+.print-cv-link:hover {
+  color: #fff;
+}
+
 .header-actions {
   display: flex;
   align-items: center;
@@ -606,6 +620,7 @@ tr:hover {
   .manager-page { width: 90%; margin-top: 40px; }
   .manager-header h2 { font-size: 22px; }
   .header-actions { gap: 10px; }
+  .print-cv-link { font-size: 15px; }
   .search-input { min-width: 200px; padding: 9px 12px; border-radius: 12px; font-size: 15px; }
   .filter-select { padding: 9px 10px; border-radius: 12px; font-size: 15px; }
   .add-btn { padding: 9px 14px; font-size: 16px; border-radius: 12px; }
@@ -637,6 +652,7 @@ tr:hover {
   .navbar { padding: 10px 4%; }
   .logo { font-size: 14px; }
   .manager-header h2 { font-size: 18px; }
+  .print-cv-link { font-size: 14px; }
   .search-input { font-size: 14px; padding: 8px 10px; border-radius: 11px; }
   .filter-select { font-size: 14px; padding: 8px; border-radius: 11px; }
   .add-btn { font-size: 15px; padding: 9px; border-radius: 11px; }
