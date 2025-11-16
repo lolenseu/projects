@@ -5,7 +5,7 @@
 <div class="teacher-page">
   <div class="teacher-header">
     <div style="display:flex;align-items:center;gap:12px;">
-      <h2>Teacher List</h2>
+      <h2>Teacher</h2>
       <a id="printCv" class="print-cv-link">Print CV</a>
     </div>
     <div class="header-actions">
@@ -18,7 +18,7 @@
         <option value="CBME">CBME</option>
       </select>
       <label class="filter-label" for="searchInput">Search:</label>
-      <input id="searchInput" class="search-input" type="text" placeholder="Search Teacher ID or Name">
+      <input id="searchInput" class="search-input" type="text" placeholder="Teacher ID or Name">
       <button class="add-btn" id="openModalBtn">Add New</button>
     </div>
   </div>

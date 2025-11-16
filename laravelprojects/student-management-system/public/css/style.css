@@ -862,6 +862,108 @@ main {
   margin-top: 15px;
 }
 
+/* REPORT PAGE STYLES */
+.report-page {
+  width: 64%;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.report-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.report-header h2 {
+  margin: 0;
+  font-size: 26px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.print-cv-link {
+  color: #cccccc;
+  text-decoration: none;
+  padding: 0 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  line-height: 1;
+}
+
+.print-cv-link:hover {
+  color: #fff;
+}
+
+.report-container {
+  background: #fff;
+  padding: 25px;
+  border-radius: 13px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  text-align: center;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.report-container table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fafafa;
+  border-radius: 13px;
+  overflow: hidden;
+  table-layout: fixed;
+}
+
+.report-container th {
+  background: #505050;
+  color: #fff;
+  padding: 12px;
+  text-align: center;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.report-container td {
+  padding: 10px 12px;
+  border-top: 2px solid #ddd;
+  color: #333;
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+  text-align: center;
+}
+
+.report-container td.department-cell {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.report-container td.student-count-cell,
+.report-container td.teacher-count-cell,
+.report-container td.subject-count-cell {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.report-container tr:hover {
+  background: #f1f1f1;
+}
+
+.no-reports {
+  text-align: center;
+  color: #555;
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 15px;
+}
+
 /* MODAL STYLE */
 .modal {
   display: none;
@@ -1061,50 +1163,418 @@ main {
 
 /* MOBILE VIEW */
 @media (max-width: 900px) {
-  .student-page { width: 90%; margin-top: 40px; }
-  .student-header h2 { font-size: 22px; }
-  .header-actions { gap: 10px; }
-  .print-cv-link { font-size: 15px; }
-  .search-input { min-width: 200px; padding: 9px 12px; border-radius: 12px; font-size: 15px; }
-  .filter-select { padding: 9px 10px; border-radius: 12px; font-size: 15px; }
-  .add-btn { padding: 9px 14px; font-size: 16px; border-radius: 12px; }
-  .modal-content { width: 86%; margin: 10% auto; }
-  table th, table td { font-size: 15px; }
+  .student-page, .teacher-page, .subject-page, .report-page {
+    width: 90%;
+    margin-top: 40px;
+  }
+  
+  .student-header h2, .teacher-header h2, .subject-header h2, .report-header h2 {
+    font-size: 22px;
+  }
+  
+  .header-actions {
+    gap: 10px;
+  }
+  
+  .print-cv-link {
+    font-size: 15px;
+  }
+  
+  .search-input {
+    min-width: 200px;
+    padding: 9px 12px;
+    border-radius: 12px;
+    font-size: 15px;
+  }
+  
+  .filter-select {
+    padding: 9px 10px;
+    border-radius: 12px;
+    font-size: 15px;
+  }
+  
+  .add-btn {
+    padding: 9px 14px;
+    font-size: 16px;
+    border-radius: 12px;
+  }
+  
+  .modal-content {
+    width: 86%;
+    margin: 10% auto;
+  }
+  
+  table th, table td {
+    font-size: 15px;
+  }
+  
+  .student-container td.student-id-cell,
+  .teacher-container td.teacher-id-cell,
+  .report-container td.report-code-cell,
+  .report-container td.report-name-cell {
+    max-width: 100px;
+  }
+  
+  .student-container td.name-cell,
+  .teacher-container td.name-cell,
+  .report-container td.department-cell {
+    max-width: 150px;
+  }
+  
+  .student-container td.subjects-cell,
+  .teacher-container td.subject-cell {
+    max-width: 150px;
+  }
+  
+  .report-container td.student-count-cell,
+  .report-container td.total-subjects-cell {
+    max-width: 100px;
+  }
 }
 
 @media (max-width: 600px) {
-  .student-page { width: 98%; margin-top: 24px; }
-  .student-header { flex-direction: column; align-items: stretch; gap: 12px; }
-  .student-header h2 { font-size: 20px; text-align: left; }
-  .header-actions { flex-direction: column; align-items: stretch; gap: 10px; }
-  .search-input { width: 100%; min-width: unset; padding: 10px; border-radius: 12px; font-size: 15px; }
-  .filter-select { width: 100%; margin-right: 0; }
-  .add-btn { width: 100%; padding: 10px; font-size: 16px; }
-  .student-container { padding: 16px; }
-  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 10px; }
-  thead { display: table-header-group; }
-  tbody { display: table-row-group; }
-  th, td { white-space: nowrap; text-align: left; padding: 10px; font-size: 14px; }
-  .modal-content { width: 94%; margin: 12% auto; padding: 14px; }
-  .modal-content input, .modal-content textarea, .modal-content select { width: 96%; min-width: unset; }
-  .modal-content select { margin: 10px 0 18px 0; width: 96%; }
-  .student-container .view-btn, .student-container .edit-btn, .student-container .delete-btn { font-size: 14px; padding: 8px 10px; }
-  .back-to-top { right: 18px; bottom: 18px; padding: 10px 14px; }
+  .student-page, .teacher-page, .subject-page, .report-page {
+    width: 98%;
+    margin-top: 24px;
+  }
+  
+  .student-header, .teacher-header, .subject-header, .report-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .student-header h2, .teacher-header h2, .subject-header h2, .report-header h2 {
+    font-size: 20px;
+    text-align: left;
+  }
+  
+  .header-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  
+  .search-input {
+    width: 100%;
+    min-width: unset;
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 15px;
+  }
+  
+  .filter-select {
+    width: 100%;
+    margin-right: 0;
+  }
+  
+  .add-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .student-container, .teacher-container, .subject-container, .report-container {
+    padding: 16px;
+  }
+  
+  table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 10px;
+  }
+  
+  thead {
+    display: table-header-group;
+  }
+  
+  tbody {
+    display: table-row-group;
+  }
+  
+  th, td {
+    white-space: nowrap;
+    text-align: left;
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .modal-content {
+    width: 94%;
+    margin: 12% auto;
+    padding: 14px;
+  }
+  
+  .modal-content input,
+  .modal-content textarea,
+  .modal-content select {
+    width: 96%;
+    min-width: unset;
+  }
+  
+  .modal-department {
+    margin: 10px 0 18px 0;
+    width: 96%;
+  }
+  
+  .student-container .view-btn,
+  .student-container .edit-btn,
+  .student-container .delete-btn,
+  .teacher-container .view-btn,
+  .teacher-container .edit-btn,
+  .teacher-container .delete-btn,
+  .subject-container .view-btn,
+  .subject-container .edit-btn,
+  .subject-container .delete-btn,
+  .report-container .view-btn,
+  .report-container .edit-btn,
+  .report-container .delete-btn {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+  
+  .student-select-subject,
+  .teacher-select-subject {
+    width: 96%;
+  }
+  
+  .back-to-top {
+    right: 18px;
+    bottom: 18px;
+    padding: 10px 14px;
+  }
 }
 
 @media (max-width: 420px) {
-  .navbar { padding: 10px 4%; }
-  .logo { font-size: 14px; }
-  .student-header h2 { font-size: 18px; }
-  .print-cv-link { font-size: 14px; }
-  .search-input { font-size: 14px; padding: 8px 10px; border-radius: 11px; }
-  .filter-select { font-size: 14px; padding: 8px; border-radius: 11px; }
-  .add-btn { font-size: 15px; padding: 9px; border-radius: 11px; }
-  .modal-content { width: 96%; margin: 14% auto; padding: 12px; }
-  .modal-content h3 { font-size: 18px; }
-  th, td { font-size: 13px; padding: 8px; }
-  .student-container { padding: 12px; }
-  .student-container table { border-radius: 8px; }
-  .student-container .view-btn, .student-container .edit-btn, .student-container .delete-btn { padding: 7px 8px; font-size: 13px; }
-  .back-to-top { right: 12px; bottom: 12px; padding: 8px 12px; font-size: 13px; }
+  .navbar {
+    padding: 10px 4%;
+  }
+  
+  .logo {
+    font-size: 14px;
+  }
+  
+  .username {
+    font-size: 14px;
+  }
+  
+  .nav-links a {
+    font-size: 14px;
+    padding: 0 3px;
+  }
+  
+  .student-header h2, .teacher-header h2, .subject-header h2, .report-header h2 {
+    font-size: 18px;
+  }
+  
+  .print-cv-link {
+    font-size: 14px;
+  }
+  
+  .search-input {
+    font-size: 14px;
+    padding: 8px 10px;
+    border-radius: 11px;
+  }
+  
+  .filter-select {
+    font-size: 14px;
+    padding: 8px;
+    border-radius: 11px;
+  }
+  
+  .add-btn {
+    font-size: 15px;
+    padding: 9px;
+    border-radius: 11px;
+  }
+  
+  .modal-content {
+    width: 96%;
+    margin: 14% auto;
+    padding: 12px;
+  }
+  
+  .modal-content h3 {
+    font-size: 18px;
+  }
+  
+  th, td {
+    font-size: 13px;
+    padding: 8px;
+  }
+  
+  .student-container, .teacher-container, .subject-container, .report-container {
+    padding: 12px;
+  }
+  
+  .student-container table,
+  .teacher-container table,
+  .subject-container table,
+  .report-container table {
+    border-radius: 8px;
+  }
+  
+  .student-container .view-btn,
+  .student-container .edit-btn,
+  .student-container .delete-btn,
+  .teacher-container .view-btn,
+  .teacher-container .edit-btn,
+  .teacher-container .delete-btn,
+  .subject-container .view-btn,
+  .subject-container .edit-btn,
+  .subject-container .delete-btn,
+  .report-container .view-btn,
+  .report-container .edit-btn,
+  .report-container .delete-btn {
+    padding: 7px 8px;
+    font-size: 13px;
+  }
+  
+  .back-to-top {
+    right: 12px;
+    bottom: 12px;
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .student-page, .teacher-page, .subject-page, .report-page {
+    width: 95%;
+  }
+  
+  .header-actions {
+    flex-wrap: wrap;
+  }
+  
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  @media (max-width: 480px) {
+    .student-container td.subjects-cell,
+    .teacher-container td.subject-cell,
+    .report-container td.total-subjects-cell {
+      display: none;
+    }
+    
+    .student-container td.student-id-cell,
+    .teacher-container td.teacher-id-cell,
+    .report-container td.report-code-cell {
+      max-width: 80px;
+    }
+    
+    .student-container td.name-cell,
+    .teacher-container td.name-cell,
+    .report-container td.department-cell,
+    .report-container td.report-name-cell {
+      max-width: 120px;
+    }
+    
+    .report-container td.student-count-cell {
+      max-width: 80px;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .student-page, .teacher-page, .subject-page, .report-page {
+    width: 85%;
+  }
+  
+  .navbar {
+    padding: 20px 10%;
+  }
+  
+  .student-container td.subjects-cell,
+  .teacher-container td.subject-cell,
+  .report-container td.report-name-cell {
+    max-width: 180px;
+  }
+  
+  .student-container td.name-cell,
+  .teacher-container td.name-cell,
+  .report-container td.department-cell {
+    max-width: 160px;
+  }
+}
+
+@media (max-width: 1024px) {
+  button {
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
+  }
+  
+  input, select {
+    font-size: 16px;
+  }
+  
+  table {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .modal-content {
+    margin: 5% auto;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  input:focus,
+  select:focus,
+  button:focus {
+    outline: 2px solid #0078d7;
+    outline-offset: 2px;
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .student-container table,
+  .teacher-container table,
+  .subject-container table,
+  .report-container table {
+    border-collapse: separate;
+  }
+  
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@media (orientation: landscape) {
+  .student-header, .teacher-header, .subject-header, .report-header {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .header-actions {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .student-container, .teacher-container, .subject-container, .report-container {
+    padding: 20px;
+  }
+}
+
+@media (orientation: portrait) {
+  .student-page, .teacher-page, .subject-page, .report-page {
+    margin-top: 20px;
+  }
+  
+  .header-actions {
+    width: 100%;
+  }
+  
+  .student-header, .teacher-header, .subject-header, .report-header {
+    gap: 15px;
+  }
 }

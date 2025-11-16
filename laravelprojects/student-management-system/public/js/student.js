@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function(){
         <td style="padding:6px;border:1px solid #ccc;text-align:center">${dept}</td>
         <td style="padding:6px;border:1px solid #ccc;text-align:left">${sid}</td>
         <td style="padding:6px;border:1px solid #ccc;text-align:left">${name}</td>
-        <td style="padding:6px;border:1px solid #ccc;text-align:left">${subjects}</td>
+        <td style="padding:6px;border:1px solid #ccc;text-align:left">${subjects.replace(/, /g, ',\n')}</td>
       </tr>`;
     });
     return `<!doctype html>
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function(){
             body{font-family:Arial,sans-serif;color:#222;padding:15px;font-size:12px;}
             table{border-collapse:collapse;width:100%;font-size:11px;}
             th{background:#f4f4f4;padding:8px;border:1px solid #ccc;text-align:center;font-weight:bold;}
-            td{padding:6px;border:1px solid #ccc;}
+            td{padding:6px;border:1px solid #ccc;white-space:pre-line;}
             h2{text-align:center;margin-bottom:15px;font-size:16px;}
           </style>
         </head>

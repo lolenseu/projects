@@ -35,8 +35,11 @@ document.addEventListener('DOMContentLoaded', function(){
       const code = row.querySelector('.subject-code-cell')?.textContent.trim() || '';
       const name = row.querySelector('.subject-name-cell')?.textContent.trim() || '';
       const dept = row.querySelector('.department-cell')?.textContent.trim() || '';
-      const credits = row.querySelector('.credits-cell')?.textContent.trim() || '';
-      rowsHtml += `<tr><td style="padding:8px;border:1px solid #ccc;">${code}</td><td style="padding:8px;border:1px solid #ccc;">${name}</td><td style="padding:8px;border:1px solid #ccc;">${dept}</td><td style="padding:8px;border:1px solid #ccc;">${credits}</td></tr>`;
+      rowsHtml += `<tr>
+        <td style="padding:6px;border:1px solid #ccc;text-align:left">${code}</td>
+        <td style="padding:6px;border:1px solid #ccc;text-align:left">${name}</td>
+        <td style="padding:6px;border:1px solid #ccc;text-align:center">${dept}</td>
+      </tr>`;
     });
     return `<!doctype html>
       <html>
@@ -44,9 +47,11 @@ document.addEventListener('DOMContentLoaded', function(){
           <meta charset="utf-8">
           <title>Subject List</title>
           <style>
-            body{font-family:Arial,sans-serif;color:#222;padding:20px;}
-            table{border-collapse:collapse;width:100%;}
-            th{background:#f4f4f4;padding:10px;border:1px solid #ccc;text-align:left;}
+            body{font-family:Arial,sans-serif;color:#222;padding:15px;font-size:12px;}
+            table{border-collapse:collapse;width:100%;font-size:11px;}
+            th{background:#f4f4f4;padding:8px;border:1px solid #ccc;text-align:center;font-weight:bold;}
+            td{padding:6px;border:1px solid #ccc;}
+            h2{text-align:center;margin-bottom:15px;font-size:16px;}
           </style>
         </head>
         <body>
@@ -54,14 +59,13 @@ document.addEventListener('DOMContentLoaded', function(){
           <table>
             <thead>
               <tr>
-                <th style="padding:10px;border:1px solid #ccc;">Subject Code</th>
-                <th style="padding:10px;border:1px solid #ccc;">Subject Name</th>
-                <th style="padding:10px;border:1px solid #ccc;">Department</th>
-                <th style="padding:10px;border:1px solid #ccc;">Credits</th>
+                <th>Subject Code</th>
+                <th>Subject Name</th>
+                <th>Department</th>
               </tr>
             </thead>
             <tbody>
-              ${rowsHtml || '<tr><td colspan="4" style="padding:8px;border:1px solid #ccc;">No records</td></tr>'}
+              ${rowsHtml || '<tr><td colspan="3" style="padding:8px;border:1px solid #ccc;text-align:center">No records found</td></tr>'}
             </tbody>
           </table>
         </body>
@@ -92,13 +96,11 @@ document.addEventListener('DOMContentLoaded', function(){
       const editSubjectCode = document.getElementById('editSubjectCode');
       const editSubjectName = document.getElementById('editSubjectName');
       const editDescription = document.getElementById('editDescription');
-      const editCredits = document.getElementById('editCredits');
       const editDepartment = document.getElementById('editDepartment');
       if (editForm) editForm.action = `/subject/update/${id}`;
       if (editSubjectCode) editSubjectCode.value = btn.getAttribute('data-subject-code') || '';
       if (editSubjectName) editSubjectName.value = btn.getAttribute('data-subject-name') || '';
       if (editDescription) editDescription.value = btn.getAttribute('data-description') || '';
-      if (editCredits) editCredits.value = btn.getAttribute('data-credits') || '';
       if (editDepartment) editDepartment.value = btn.getAttribute('data-department') || 'GS';
       const editModal = document.getElementById('editModal');
       if (editModal) editModal.style.display = 'block';
@@ -116,13 +118,15 @@ document.addEventListener('DOMContentLoaded', function(){
       const viewSubjectCode = document.getElementById('viewSubjectCode');
       const viewSubjectName = document.getElementById('viewSubjectName');
       const viewDescription = document.getElementById('viewDescription');
-      const viewCredits = document.getElementById('viewCredits');
       const viewDepartment = document.getElementById('viewDepartment');
+      const viewTeacher = document.getElementById('viewTeacher');
+      
       if (viewSubjectCode) viewSubjectCode.textContent = btn.getAttribute('data-subject-code') || '';
       if (viewSubjectName) viewSubjectName.textContent = btn.getAttribute('data-subject-name') || '';
       if (viewDescription) viewDescription.textContent = btn.getAttribute('data-description') || '';
-      if (viewCredits) viewCredits.textContent = btn.getAttribute('data-credits') || '';
       if (viewDepartment) viewDepartment.textContent = btn.getAttribute('data-department') || '';
+      if (viewTeacher) viewTeacher.textContent = btn.getAttribute('data-teacher') || '';
+      
       const viewModal = document.getElementById('viewModal');
       if (viewModal) viewModal.style.display = 'block';
     });

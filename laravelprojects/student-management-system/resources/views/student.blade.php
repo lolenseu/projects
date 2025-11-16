@@ -5,7 +5,7 @@
 <div class="student-page">
   <div class="student-header">
     <div style="display:flex;align-items:center;gap:12px;">
-      <h2>Student List</h2>
+      <h2>Student</h2>
       <a id="printCv" class="print-cv-link">Print CV</a>
     </div>
     <div class="header-actions">
@@ -18,7 +18,7 @@
         <option value="CBME">CBME</option>
       </select>
       <label class="filter-label" for="searchInput">Search:</label>
-      <input id="searchInput" class="search-input" type="text" placeholder="Search Student ID or Name">
+      <input id="searchInput" class="search-input" type="text" placeholder="Student ID or Name">
       <button class="add-btn" id="openModalBtn">Add New</button>
     </div>
   </div>

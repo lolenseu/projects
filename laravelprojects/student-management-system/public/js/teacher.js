@@ -32,11 +32,16 @@ document.addEventListener('DOMContentLoaded', function(){
     let rowsHtml = '';
     getRows().forEach(row => {
       if (window.getComputedStyle(row).display === 'none') return;
+      const dept = row.querySelector('.department-cell')?.textContent.trim() || '';
       const tid = row.querySelector('.teacher-id-cell')?.textContent.trim() || '';
       const name = row.querySelector('.name-cell')?.textContent.trim() || '';
-      const dept = row.querySelector('.department-cell')?.textContent.trim() || '';
       const subject = row.querySelector('.subject-cell')?.textContent.trim() || '';
-      rowsHtml += `<tr><td style="padding:8px;border:1px solid #ccc;">${tid}</td><td style="padding:8px;border:1px solid #ccc;">${name}</td><td style="padding:8px;border:1px solid #ccc;">${dept}</td><td style="padding:8px;border:1px solid #ccc;">${subject}</td></tr>`;
+      rowsHtml += `<tr>
+        <td style="padding:6px;border:1px solid #ccc;text-align:center">${dept}</td>
+        <td style="padding:6px;border:1px solid #ccc;text-align:left">${tid}</td>
+        <td style="padding:6px;border:1px solid #ccc;text-align:left">${name}</td>
+        <td style="padding:6px;border:1px solid #ccc;text-align:left">${subject}</td>
+      </tr>`;
     });
     return `<!doctype html>
       <html>
@@ -44,9 +49,11 @@ document.addEventListener('DOMContentLoaded', function(){
           <meta charset="utf-8">
           <title>Teacher List</title>
           <style>
-            body{font-family:Arial,sans-serif;color:#222;padding:20px;}
-            table{border-collapse:collapse;width:100%;}
-            th{background:#f4f4f4;padding:10px;border:1px solid #ccc;text-align:left;}
+            body{font-family:Arial,sans-serif;color:#222;padding:15px;font-size:12px;}
+            table{border-collapse:collapse;width:100%;font-size:11px;}
+            th{background:#f4f4f4;padding:8px;border:1px solid #ccc;text-align:center;font-weight:bold;}
+            td{padding:6px;border:1px solid #ccc;}
+            h2{text-align:center;margin-bottom:15px;font-size:16px;}
           </style>
         </head>
         <body>
@@ -54,14 +61,14 @@ document.addEventListener('DOMContentLoaded', function(){
           <table>
             <thead>
               <tr>
-                <th style="padding:10px;border:1px solid #ccc;">Teacher ID</th>
-                <th style="padding:10px;border:1px solid #ccc;">Department</th>
-                <th style="padding:10px;border:1px solid #ccc;">Name</th>
-                <th style="padding:10px;border:1px solid #ccc;">Assigned Subject</th>
+                <th>Department</th>
+                <th>Teacher ID</th>
+                <th>Name</th>
+                <th>Assigned Subject</th>
               </tr>
             </thead>
             <tbody>
-              ${rowsHtml || '<tr><td colspan="4" style="padding:8px;border:1px solid #ccc;">No records</td></tr>'}
+              ${rowsHtml || '<tr><td colspan="4" style="padding:8px;border:1px solid #ccc;text-align:center">No records found</td></tr>'}
             </tbody>
           </table>
         </body>
